@@ -1,0 +1,10 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{interview.title}}
+block head
+block main
+  //-.talkcover(style="background-image:url({{interview.cover}})")
+  #interview
+    div(style="font-size:16px;line-height:28px;padding:20px")
+      h2 {{interview.title|e}}
+      {{interview.content|safe}} 

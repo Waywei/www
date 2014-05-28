@@ -1,0 +1,2 @@
+apt-get install python-setuptools python-dev gunicorn postgresql-client postgresql nginx redis-server
+apt-get install libpq-dev libjpeg-dev

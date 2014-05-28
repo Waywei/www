@@ -1,0 +1,23 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 访谈
+block head
+block main
+  .talkcover(style="background:#57ad69")
+    .title
+      h1 {{config.BASETITLE}}访谈
+      p 不同的生活经历,得到不同的生活经验,把他们留给年轻人是一件非常有意义的事情
+  #interview
+    for t in interviews.items
+      .item
+        .detail
+          h2  
+            a(href="/interview/{{t.absurl}}") {{t.title | e}}
+          p.date {{t.create_time | time}}
+    .page
+        if interviews.has_prev
+          a.left.light-btn.btn1(href='/interview/page/{{interviews.prev_num}}') 上一页
+        if interviews.has_next
+          a.right.light-btn.btn1(href='/interview/page/{{interviews.next_num}}') 下一页
+
+    

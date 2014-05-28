@@ -1,0 +1,33 @@
+if g.user
+  .box.my
+    .box-title
+        {{g.user.username}}
+    .box-content
+      p
+        a(href="/my/favuser") 
+          i.fa.fa-users
+          特别关注  
+
+      p
+        a(href="/my/favtopic") 
+          i.fa.fa-thumbs-up
+          收藏的话题
+      p
+        a(href="/my/favnode") 
+          i.fa.fa-leaf
+          收藏的节点
+      .line
+      p(style="font-size:11px")
+        a.light-btn.btn1(href="/setting") 个人设置
+        | 
+        a.light-btn.btn1(href="/avatar") 头像设置
+        //-| 
+        //-a.light-btn.btn1(href="/find/setting") 交友设置
+else 
+  .box.my
+    .box-title
+      | 关于{{config.BASETITLE}} 
+    .box-content
+      p {{config.BASETITLE}}不是一个适合大众的社区，喜爱{{config.BASETITLE}}的成员们会让他保持一个和谐的氛围，交流,分享,发现更多有趣的事物。
+      p
+        a.light-btn.btn1(href="/page/about") 了解更多

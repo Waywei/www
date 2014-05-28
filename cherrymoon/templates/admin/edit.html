@@ -1,0 +1,10 @@
+{% extends 'admin/model/edit.html' %}
+ 
+{% block tail %}
+    {{ super() }}
+<script>
+  $("textarea").css('width','100%').css('min-height','300px')
+</script>
+    <script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+    <script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+{% endblock %}

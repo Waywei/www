@@ -1,0 +1,29 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/member/{{user.id}}") {{user.username | e}}
+      |  >  
+      span 最近的回复
+    #content
+      include member/cover
+      .box 
+        .box-title
+          |最近的回复
+        .box-content
+          .my-reply(style="margin-top:0px;font-size:13px")
+            for comment in comments
+              .item
+                p.info 回复了 
+                  a(href="/member/{{comment.topic.user.id}}"){{comment.topic.user.username}} 
+                  | 的话题 -  
+                  a(href="/topic/{{comment.topic.id}}") {{comment.topic.title|e}} 
+                  | - {{comment.create_time|timesince}}
+                p(style="background:#f3f3f3;padding:10px 20px;line-height:150%") {{comment.content|content}}
+    #aside
+      include base/my

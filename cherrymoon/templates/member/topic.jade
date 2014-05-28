@@ -1,0 +1,36 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/member/{{user.id}}") {{user.username | e}}
+      |  >  
+      span 最近发表的主题
+    #content
+      include member/cover
+      .box 
+        .box-title
+          | 最近发布的主题
+        .box-content
+          .topic-list
+            for topic in topics
+              .item
+                p 
+                  a(href="/topic/{{topic.id}}") {{topic.title|e}}
+                .info 
+                  span
+                    a(href="/member/{{topic.user.id}}") 
+                      i.fa.fa-user
+                      {{topic.user.username}} 
+                  span
+                    i.fa.fa-clock-o 
+                    | {{topic.create_time|timesince}}
+                  span
+                    i.fa.fa-bar-chart-o
+                    | {{topic.hits}}次浏览
+    #aside
+      include base/my

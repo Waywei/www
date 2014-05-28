@@ -1,0 +1,25 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      | 我的特别关注
+    #content
+      .box
+        .box-title
+          |我的特别关注
+        .box-content
+          .usergrid
+            for user in favuser
+              .item 
+                a(href="/member/{{user.id}}") 
+                  {{user.email|avatar}}
+                  br
+                  {{user.username|e}}
+
+    #aside
+      include base/my

@@ -1,0 +1,21 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title 
+  title {{config.BASETITLE}} - 头像设置
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/setting") 头像设置
+    #content
+      include base/flash.html
+      .box
+        .box-title
+          | 头像设置
+        .box-content
+          .regform
+            p 请用使用gavatar，图片存储下一阶段才会开放
+    #aside
+      include base/my
+

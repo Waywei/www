@@ -1,0 +1,39 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      | 收藏的话题
+    #content
+      .box
+        .box-title
+          |收藏的话题
+        .box-content
+          .topic-list
+            for topic in favtopic
+              .item
+                p 
+                  a(href="/topic/{{topic.id}}") {{topic.title|e}}
+                .info 
+                  span
+                    a.nodebtn(href="/node/{{topic.node.slug}}") {{topic.node.name}}
+                  span
+                    a(href="/member/{{topic.user.id}}") 
+                      i.fa.fa-user
+                      {{topic.user.username}} 
+                  span
+                    i.fa.fa-clock-o 
+                    | {{topic.create_time|timesince}}
+                  span
+                    i.fa.fa-comment-o
+                    | {{topic.comment_count}}
+                  span
+                    i.fa.fa-bar-chart-o
+                    | {{topic.hits}}次
+
+    #aside
+      include base/my

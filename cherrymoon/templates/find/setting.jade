@@ -1,0 +1,69 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title 
+  title {{config.BASETITLE}} - 交友信息设置
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/looking-setting") 交友信息设置
+    #content
+      include base/flash.html
+      .box
+        .box-title
+          |上传个人真实照片
+        .box-content
+          .regform(style="clear:both;overflow:hidden")
+            if g.user.photo
+              p
+                img(src="{{config.SURL}}upload/find/{{g.user.photo}}",style="width:250px;float:left;margin-right:10px")
+            .div(style="width:300px;float:left;padding-left:10px")
+              form.light-form(action="/find/upload",method="POST",enctype="multipart/form-data")
+                {{uploadform.csrf_token}}
+                h3 上传图片最好是高宽比例1:1 图片分辨率大于500px*500px
+                p
+                  label.file
+                    input(type="file",id="uploads",name="uploads")
+                    span.file-text 
+                      |请选择您要上传的文件 
+                    span.file-icon
+                      |选择
+      .box
+        .box-title
+          | 设置详细信息
+        .box-content
+          .regform
+            form.light-form(action="/find/setting",method="POST")
+              {{form.csrf_token }}
+              .group
+                .text   
+                .input-item(style="width:400px")
+                  if g.user.find_active == 0
+                    p 当前为不活跃状态 可以把它设置为"活跃"让其他成员在[交友]看到自己
+                  else
+                    p 当前为活跃状态 你可以在重新设置自己的状态决定是否出现在[交友]里
+              {{render_field(form.is_active)}}
+              {{render_field(form.age)}}
+              {{render_field(form.height)}}
+              {{render_field(form.weight)}}
+              br
+              {{render_field(form.like)}}
+              br
+              {{render_field(form.latitude)}}
+              {{render_field(form.longitude)}}
+              .group
+                .text   
+                .input-item
+                  a#getgeo.light-btn.btn 获取地理位置
+                  .geoerror
+              br
+              br
+              {{render_field(form.findinfo)}}
+              .group
+                .text  
+                .input-item
+                  button.light-btn.btn1 提交
+
+    #aside
+      include base/my

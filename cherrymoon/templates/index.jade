@@ -1,0 +1,37 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 首页
+block main
+  .talkcover(style="background:#000")
+    .title
+      h1 {{config.BASETITLE}}
+      h2 寻找 思考 分享 交流
+      .node
+        for n in node
+          a(href="node/{{n.slug}}") {{n.name|e}}
+
+  .index
+      .box
+        .box-title
+          最近的话题
+          a(href="/recent") 全部话题
+        .box-content
+          .topic-list
+            for t in topics
+              .item
+                .detail
+                    a(href="/topic/{{t.id}}") {{t.title | e}}
+
+   
+      .box
+        .box-title
+          最新的访谈
+          a(href="/interview") 全部访谈
+        .box-content
+          .topic-list
+            for t in interviews
+              .item
+                .detail
+                    a(href="/interview/{{t.absurl}}") {{t.title | e}}
+       
+  

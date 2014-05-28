@@ -1,0 +1,64 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/member/{{user.id}}") {{user.username | e}}
+      |  >  
+      span 个人资料
+    #content
+      include member/cover
+      .box
+        .box-title
+          | 介绍
+        .box-content
+          .mitem 
+            p {{user.description|e}}
+      .box
+        .box-title
+          | 相关链接
+        .box-content
+          .mitem
+            if user.website
+              p.link
+                a(href="{{user.website|e}}",target="_blank")
+                  .fa.fa-cloud  
+                  {{user.website|e}}
+            if user.weibo
+              p.link
+                .fa.fa-weibo
+                a(href="{{user.weibo|e}}",target="_blank") {{user.weibo|e}}
+
+            if user.instagram
+              p.link
+                .fa.fa-instagram
+                a(href="{{user.instagram|e}}",target="_blank") {{user.instagram|e}}
+
+            if user.flickr
+              p.link
+                .fa.fa-flickr
+                a(href="{{user.flickr|e}}",target="_blank") {{user.flickr|e}}
+
+
+            if user.twitter
+              p.link
+                .fa.fa-twitter
+                a(href="{{user.twitter|e}}",target="_blank") {{user.twitter|e}}
+
+            if user.renren
+              p.link
+                .fa.fa-renren
+                a(href="{{user.renren|e}}",target="_blank") {{user.renren|e}}
+
+            if user.facebook
+              p.link
+                .fa.fa-facebook
+                a(href="{{user.facebook|e}}",target="_blank") {{user.facebook|e}}
+
+    #aside
+      include base/my

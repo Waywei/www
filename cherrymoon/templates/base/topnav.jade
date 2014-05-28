@@ -1,0 +1,23 @@
+.header
+    .topnav
+      .nav
+        ul
+          li
+            a(href="/") 首页 
+          li
+            a(href="/recent") 话题 
+          li
+            a(href="/interview") 访谈 
+          li
+            a(href="/node") 节点 
+          //-li
+            a(href="/find") 交友 
+      .userpanel
+        if g.user
+            a.avatar(href="/member/{{g.user.id}}")
+              {{g.user.email | avatar}}
+            a(href="/setting") 设置
+            a(href="/logout") 退出
+        else
+            a(href="/login") 登陆 
+            a(href="/register") 注册 

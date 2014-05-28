@@ -1,0 +1,25 @@
+.node-info
+  .avatar
+    a(href="/node/{{node.slug}}")
+      img(src="{{node.avatar}}",alt="{{node.slug}}")
+  .detail
+    h2 
+      {{node.name | e}} 
+      span 共有{{node.topic_count}}个话题
+    p {{node.description}}
+    .action 
+      a.light-btn.btn1(href="/node/{{node.slug}}/new") 
+        i.fa.fa-plus-square
+        span 新话题
+      |     
+      if g.user
+        if isFav
+          a.favtopic.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
+            i.fa.fa-star
+            span 取消收藏
+        else
+          a.favtopic.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
+            i.fa.fa-star
+            span 收藏节点
+
+

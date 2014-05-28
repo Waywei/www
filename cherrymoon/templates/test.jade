@@ -1,0 +1,7 @@
+h1 dwqdqw
+form(action="/test",method="POST",name="sss")
+  input(type="hidden",name="_csrf_token",value="{{ csrf_token() }}")
+  input(type="text",name="name",value="{{namefield.text}}")
+  {{namefield.error}}
+  button
+

@@ -1,0 +1,36 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title 
+  title {{config.BASETITLE}} - 设置
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/setting") 个人设置
+    #content
+      include base/flash.html
+      .box
+        .box-title
+          | 个人设置
+        .box-content
+          .regform
+            form.light-form(action="/setting",method="POST")
+              {{form.csrf_token }}
+              {{render_field(form.city)}}
+              {{render_field(form.description)}}
+              br
+              br
+              {{render_field(form.website)}}
+              {{render_field(form.weibo)}}
+              {{render_field(form.instagram)}}
+              {{render_field(form.flickr)}}
+              {{render_field(form.twitter)}}
+              {{render_field(form.renren)}}
+              {{render_field(form.facebook)}}
+              .group
+                .text  
+                .input-item
+                  button.light-btn.btn1 提交
+    #aside
+      include base/my

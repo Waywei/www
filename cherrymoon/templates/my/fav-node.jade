@@ -1,0 +1,29 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{user.username}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      | 收藏的节点
+    #content
+      .box
+        .box-title
+          |收藏的节点
+        .box-content
+          .allnode.pure-g-r
+            for n in favnode
+              .pure-u-1-3
+                .item
+                  h3 
+                    a(href="/node/{{n.slug}}") {{n.name | e }}
+                  p.time 创建于{{n.create_time|time}}
+                  p {{n.description|e}}
+
+              if loop.index%3 ==0
+                br
+      
+    #aside
+      include base/my

@@ -1,0 +1,34 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 全部节点
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/node") 全部节点
+    #content
+      .box
+        .box-title 全部节点
+        .box-content
+          .allnode
+            for n in nodes
+              .item
+                h3 
+                  a(href="/node/{{n.slug}}") {{n.name | e }}
+                p.time 创建于{{n.create_time|time}}
+                p {{n.description|e}}
+
+              if loop.index%3 ==0
+                br
+    #aside           
+      .box
+        .box-title
+          关于增加新的节点
+        .box-content
+          p 如果你觉得有你喜欢的事物是{{config.BASETITLE}}缺少的你可以发邮件告诉我们 
+            a(href="mailto:{{config.EMAIL}}") {{config.EMAIL}}
+          p 未来或许会开放用户自行添加的功能，但目前为了保证社区氛围还是采用人工的方式添加
+
+
+      

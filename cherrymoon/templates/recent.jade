@@ -1,0 +1,46 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 最新的话题
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/rencent") 最近的话题
+    #content
+      .box
+        .box-title
+          | 最近的话题
+        .box-content
+          for t in topics.items
+            .topic-list
+              .item
+                .detail
+                  h2  
+                    a(href="/topic/{{t.id}}") {{t.title | e}}
+                  .info 
+                    span
+                      a.nodebtn(href="/node/{{t.node.slug}}") {{t.node.name}}
+                    span
+                      a(href="/member/{{t.user.id}}") 
+                        i.fa.fa-user
+                        {{t.user.username}} 
+                    span
+                      i.fa.fa-clock-o 
+                      | {{t.create_time|timesince}}
+                    span
+                      i.fa.fa-comment-o
+                      | {{t.comment_count}}
+                    span
+                      i.fa.fa-bar-chart-o
+                      | {{t.hits}}
+      if topics.has_prev or topics.has_next
+        .page
+          if topics.has_prev
+            a.left.lignt-btn.btn1(href='/recent/page/{{topics.prev_num}}') 上一页
+          if topics.has_next
+            a.right.light-btn.btn1(href='/recent/page/{{topics.next_num}}') 下一页
+    #aside
+      include base/my.jade
+

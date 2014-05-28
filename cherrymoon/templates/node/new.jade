@@ -1,0 +1,36 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 添加新的话题
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/node") 节点
+      |  >  
+      a(href="/node/{{node.slug}}") {{node.name}}
+      |  >  
+      添加新话题
+    #content
+      .box
+        .box-content
+          include node/nodeinfo
+      .box
+        .box-title
+          | 添加新的话题
+        .box-content
+          .regform
+            form.light-form(action="/node/{{node.slug}}/new",method="POST")
+              {{form.csrf_token }}
+              div(style="margin-bottom:5px")
+                {{form.title(placeholder="输入标题")}}
+              div(style="margin-bottom:5px")
+                {{form.content(id="topic-content",style="min-height:240px",placeholder="输入文章内容")}}
+              button.light-btn.btn1 发表
+
+    #aside 
+      include base/my
+      if node.aside
+        {{node.aside}} 

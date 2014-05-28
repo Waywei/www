@@ -1,0 +1,446 @@
+@import 'nib'
+@import 'reset'
+@import 'form'
+@import 'button'
+
+
+m1 = #57AD69
+m2 = #60BF73
+
+f1 = #3f484f
+f2 = #9fa3a7
+
+b1 = #F8F9F2
+b2 = #e2e5e9
+
+.align-right 
+  text-align right
+
+body
+  font-size 14px
+  font-family "Hiragino Sans GB","Microsoft YaHei","微软雅黑","STHeiti","WenQuanYi Micro Hei",SimSun,sans-serif
+  background b1
+  color f1
+a
+  color #787878
+  text-decoration none
+  &:hover
+    color m1
+.inner
+  width 960px
+  margin 0 auto
+  clearfix()
+#main
+  width 960px
+  margin 0px auto
+  clearfix()
+#content      
+  padding 0px 10px
+  width 650px
+  float left
+#aside
+  background none
+  padding 0px 10px
+  width 270px
+  float right
+  .box-content
+    padding 10px
+    font-size 12px
+    p
+      margin 0px
+      margin-bottom 5px
+    ul
+      list-style none
+      padding 0px
+      li
+        margin 5px 0px
+ .breadcrumb
+  font-size 12px
+  padding 10px 
+  color f2
+  a
+    &:hover
+      color f1
+
+.light-btn .fa
+  margin-left 0px
+.fa
+  margin-right 5px
+.box
+  margin-bottom 20px
+  box-shadow 0px 2px 2px rgba(0, 0, 0, 0.1)
+  border-radius 3px
+  background #fff
+  .box-title
+    font-weight bold
+    font-size 12px
+    padding 10px
+    border-bottom 1px solid #f2f2f2
+    a
+      float right
+      color m1
+  .box-content
+    background none
+  .box-footer
+    border-top 1px solid #f2f2f2
+    padding 10px
+.main-content
+  line-height 170%
+  a
+    text-decoration underline
+.fa-1
+  font-size 14px
+.fa-2
+  font-size 16px
+.fa-3
+  font-size 20px
+.fa-4
+  font-size 32px
+.header
+  background #fff
+  font-weight bold
+  min-width 960px
+  clearfix()
+  .nav
+    ul
+      list-style none
+      margin 0px
+      padding 0px
+      li
+        float left
+        a
+          display block
+          padding 12px 20px
+          border-right 1px solid #f2f2f2
+          &:hover
+            background m1
+            color #fff
+  .userpanel
+      float right
+      text-align right
+      list-style none
+      margin 0px
+      padding 0px
+      a
+        display inline-block
+        padding  10px
+        img
+          width 20px
+          border-radius 100%
+          vertical-align bottom
+
+.my
+  img
+    border-radius 100%
+    width 100px
+.find-members
+  margin 10px
+.members
+  clearfix()
+  .member
+    width 300px
+    display inline-block
+    background #fff
+    border-radius 5px
+    margin 5px
+    position relative
+    img
+      width 100%
+      display block
+    .info
+      width 100%
+      background rgba(0,0,0,0.3)
+      position absolute
+      bottom 0px
+      left 0px
+      text-align left
+      font-size 11px
+      color #fff
+      p
+        margin 5px
+        padding 0px 5px
+
+
+.flashes
+  margin-bottom 10px
+  div
+    position relative
+    .close
+      display none
+      width 16px
+      height 16px
+      text-align center
+      line-height 16px
+      background #fff
+      position absolute
+      right 10px
+      top 6px
+      cursor pointer
+.warning
+  background #f2dede
+  color #b94a48
+  border 1px solid #eed3d7
+  padding 5px 10px
+  font-size 12px
+  border-radius 1px
+
+.success
+  background #dff0d8
+  color #468847
+  border 1px solid #d6e9c6
+  padding 5px 10px
+  font-size 12px
+  border-radius 1px
+
+.page
+  clearfix()
+  padding 20px 0px
+  .left
+    float left
+  .right 
+    float right
+.btn1
+  background m1
+  color #fff!important
+.btn2
+  background #777
+  color #fff!important
+.imgly
+  max-width 100%
+
+.allnode
+  clearfix()
+  br
+    clear both
+  .item
+    background b1
+    margin 10px
+    padding 10px
+    position relative
+    border-radius 5px
+    width 165px
+    float left
+    h3
+      margin 5px
+      a
+        margin-right 5px
+    .time
+      font-weight 100
+      color f2
+    p
+      font-size 11px
+      margin 5px
+.usergrid
+  .item
+    padding 5px 
+    margin 10px
+    display inline-block
+    max-width 100px
+    overflow hidden
+    max-height 130px
+    text-align center
+    img
+      border-radius 5px
+
+.tip
+  background #f2f2f2
+  padding 15px 
+  margin 10px 0px
+.talkcover
+    background-color #999
+    background-size cover
+    background-position 50% 50%
+    min-width 960px
+    min-height 600px
+    position relative
+    .title
+      text-align center
+      box-sizing border-box
+      position absolute
+      bottom 0px
+      left 50%
+      width 700px
+      padding 20px
+      margin-left -350px
+      color #fff
+      text-shadow 1px 1px 1px #000
+      .node
+        text-shadow none
+        max-width 500px
+        margin 0 auto
+        background rgba(255,255,255,0.5)
+        padding 20px
+        a
+          display inline-block
+          padding 5px 10px
+          background #fff
+          margin 5px
+          border-radius 3px
+          &:hover
+            background m1
+            color #fff
+#interview
+  max-width 700px
+  margin 0 auto
+  .item
+    padding 20px
+    .detail
+      h2 
+        margin 10px
+      p
+        margin 10px
+        font-size 12px
+#footer
+  padding 20px
+  background #272829
+  color #666
+  min-width 920px
+  font-size 11px
+  .footlink
+    a
+      color #999
+      margin-right 20px
+
+.topic-detail
+  padding 10px
+  .title
+    margin 0px 0px 10px 0px
+    border-bottom 2px solid m2
+    padding-bottom 10px
+  .info
+    color f2
+    font-size 12px
+    span
+      margin-right 15px
+.topic-list
+  p
+    margin 0px
+    margin-bottom 10px
+  .item
+    padding 10px
+    box-sizing border-box
+    border-bottom 1px solid b1
+    clearfix()
+    &:hover
+      background rgba(255,255,255,0.4)
+  .avatar
+    width 80px
+    float left
+    img
+      width 60px
+  .detail
+    h2 
+      margin 0px 0px 10px 0px
+  .info
+    clearfix()
+    color f2
+    font-size 11px
+    span
+      margin-right 10px
+.comment-list
+  margin-top 10px
+  .item
+    clearfix()
+    margin-bottom 10px
+  .detail
+    padding 10px 
+    border-radius 3px
+    box-shadow 0px 2px 2px rgba(0,0,0,0.1)
+    background #fff
+    margin-bottom 5px
+    p
+      margin 5px 0px
+    .info
+      color f2
+      font-size 12px
+      margin-bottom 10px
+      span 
+        margin-right 15px
+.comment-add
+  margin-top 20px
+  textarea
+    margin-bottom 10px
+    min-height 240px
+.regform
+  padding 10px
+  .light-form
+    font-size 13px
+.membercover
+  padding 10px
+  clearfix()
+  font-size 12px
+  .avatar
+    width 100px
+    float left
+    img
+      width 100px
+      border-radius 5px
+      display block
+  .detail
+    margin-left 120px
+.subnav
+  background #fff
+  margin-bottom 20px
+  box-shadow 0px 2px 2px rgba(0,0,0,0.1)
+  border-radius 3px
+  .btn
+    display inline-block
+    padding 10px 20px
+  .active
+    color m1
+
+.nodebtn
+  background m1
+  color #fff
+  padding 2px 5px
+  border-radius 2px
+  &:hover
+    color #fff
+.mitem
+  padding 0px 20px 10px 20px
+.my-reply
+  .item
+    .info
+      padding 0px 20px 
+.node-info
+  padding 10px
+  clearfix()
+  .avatar
+    width 100px
+    float left
+    a
+      width 100px
+      display block
+      img
+        box-sizing border-box
+        width 100%
+        border-radius 4px
+        display block
+  .detail
+    margin-left 120px
+    box-sizing border-box
+    p
+      margin 0px
+    h2 
+      margin 0px
+      span
+        font-size 12px
+        font-weight 100
+  .action
+    padding-top 10px
+    font-size 12px
+.line  
+  height 1px
+  background #f2f2f2
+  margin 10px 0px
+ 
+.index
+  width 960px
+  margin 20px auto
+  font-size 13px
+  clearfix()
+  .box
+    width 50%
+    float left
+
+@import 'mobile'

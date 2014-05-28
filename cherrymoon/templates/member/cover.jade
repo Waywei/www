@@ -1,0 +1,47 @@
+.subnav
+  if '/topic' not in request.path and '/reply' not in request.path and '/favnode' not in request.path and '/favtopic' not in request.path
+    a.btn.active(href="/member/{{user.id}}") 资料
+  else
+    a.btn(href="/member/{{user.id}}") 资料
+
+  if '/topic' in request.path
+    a.btn.active(href="/member/{{user.id}}/topic") 主题
+  else
+    a.btn(href="/member/{{user.id}}/topic") 主题
+  if '/reply' in request.path
+    a.btn.active(href="/member/{{user.id}}/reply") 回复
+  else
+    a.btn(href="/member/{{user.id}}/reply") 回复
+  //-if '/favnode' in request.path
+    //-a.btn.active(href="/m/#{user.username}/favnode") 收藏的节点
+  //-else
+    //-a.btn(href="/m/#{user.username}/favnode") 收藏的节点
+  //-if '/favtopic' in request.path
+    //-a.btn.active(href="/m/#{user.username}/favtopic") 收藏的话题
+  //-else
+    //-a.btn(href="/m/#{user.username}/favtopic")  收藏的话题
+.box
+  .box-title 个人资料
+  .box-content
+    .membercover
+      .avatar
+        {{user.email | avatar}}
+      .detail
+        h3
+          {{user.username}}
+        p
+          所在城市:{{user.city|e}} 
+        p
+          {{config.BASETITLE}} 第{{user.id}}位成员 - 
+          加入时间 {{user.create_time|time}}
+        p
+            if g.user and g.user != user
+              if isFav
+                a.favuser.pure-button.btn2(href="/api/v1/fav/user/{{user.id}}") 
+                  i.fa.fa-star
+                  span 取消关注
+              else
+                a.favuser.pure-button.btn1(href="/api/v1/fav/user/{{user.id}}") 
+                  i.fa.fa-star
+                  span 特别关注
+        

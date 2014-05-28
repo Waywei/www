@@ -1,0 +1,27 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title
+  title {{config.BASETITLE}} - 登陆
+block main
+    #main
+      .breadcrumb
+        a(href="/") {{config.BASETITLE}}
+        |  >  
+        a(href="/login") 登陆
+      #content
+        include base/flash.html
+        .box
+          .box-title
+            | 登陆
+          .box-content
+            .regform
+              form.light-form(action="/login",method="POST")
+                {{form.csrf_token }}
+                {{render_field(form.email)}}
+                {{render_field(form.password)}}
+                .group
+                  .text 
+                  .input-item
+                    button.light-btn.btn1 提交
+      #aside
+        include base/my.jade

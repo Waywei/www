@@ -1,0 +1,22 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{interview.title}}
+block head
+block main
+  .talkcover(style="background-image:url({{interview.cover}})")
+    .title
+      h1 {{interview.title|e}}
+      p
+        | 发布于 {{interview.create_time|time}}
+      p
+        a.light-btn.btn1(href="http://service.weibo.com/share/share.php?title={{interview.title|e}}&url={{config.BASEURL}}interview/{{interview.absurl}}&pic={{interview.cover}}")
+          i.fa.fa-weibo.fa-2 
+          |   分享到微博
+  #interview
+    div(style="font-size:16px;line-height:28px;padding:20px") {{interview.content|safe}} 
+    
+    .tip
+      p 如果你也有愿意分享自己的经历，感悟，可以发邮件到 
+        a(href="mailto:{{config.EMAIL}}"){{config.EMAIL}} 
+        |记得附带一个简单的个人介绍
+        

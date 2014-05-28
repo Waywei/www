@@ -1,0 +1,54 @@
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{node.name}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/node") 节点
+      |  >  
+      a(href="/node/{{node.slug}}") {{node.name}}
+    #content
+        .box
+          .box-content
+            include node/nodeinfo
+        .box
+          .box-title
+            | 最近的话题
+          .box-content
+            for t in topics.items
+              .topic-list
+                .item
+                  //-.avatar
+                    a(href="/member/{{t.user.id}}") 
+                      {{t.user.email | avatar}}
+                  .detail
+                    h2  
+                      a(href="/topic/{{t.id}}") {{t.title | e}}
+                    .info 
+                        span
+                          a(href="/member/{{t.user.id}}") 
+                            i.fa.fa-user
+                            {{t.user.username}} 
+                        span
+                          i.fa.fa-clock-o 
+                          | {{t.create_time|timesince}}
+                        span
+                          i.fa.fa-comment-o
+                          | {{t.comment_count}}条评论
+                        span
+                          i.fa.fa-bar-chart-o
+                          | {{t.hits}}次浏览
+        if topics.has_prev or topics.has_next
+          .page
+            if topics.has_prev
+              a.left.light-btn.btn1(href='/node/{{node.slug}}/page/{{topics.prev_num}}') 上一页
+            if topics.has_next
+              a.right.light-btn.btn1(href='/node/{{node.slug}}/page/{{topics.next_num}}') 下一页
+
+    #aside
+      include base/my
+      if node.aside
+        {{node.aside}} 

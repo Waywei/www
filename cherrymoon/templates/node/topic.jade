@@ -1,0 +1,99 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{topic.title}}
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/node") 节点
+      |  >  
+      a(href="/node/{{node.slug}}") {{node.name}}
+    #content
+      .box
+        .box-content
+          .topic-detail
+            h1.title {{topic.title|e}}
+            .info 
+                span
+                  a(href="/member/{{topic.user.id}}") 
+                    i.fa.fa-user
+                    {{topic.user.username}} 
+                span
+                  i.fa.fa-clock-o 
+                  | {{topic.create_time|timesince}}
+                span
+                  i.fa.fa-comment-o
+                  | {{topic.comment_count}}
+                span
+                  i.fa.fa-bar-chart-o
+                  | {{topic.hits}}
+
+
+            p.main-content {{topic.content|content}} 
+            .div(style="margin:20px 0px;font-size:12px")
+                a.light-btn.btn1(href="#") 
+                  .fa.fa-weibo
+                  分享微博
+                &nbsp;
+                &nbsp;
+                if g.user
+                  if isFav
+                    a.favtopic.light-btn.btn2(href="/api/v1/fav/topic/{{topic.id}}") 
+                      i.fa.fa-star
+                      span 取消收藏
+                  else
+                    a.favtopic.light-btn.btn1(href="/api/v1/fav/topic/{{topic.id}}") 
+                      i.fa.fa-star
+                      span 收藏话题
+
+      if topic.comment_count >0
+        h4
+            | 共有{{topic.comment_count}}条评论
+        #comment.comment-list
+            for c in comments
+              .item(id="comment-{{loop.index}}")
+                .detail
+                  .info
+                      span
+                        a(href="/member/{{c.user.id}}") 
+                          i.fa.fa-user
+                          {{c.user.username|e}}
+                      span
+                        i.fa.fa-bar-chart-o
+                        |发布于 {{c.create_time|timesince}}
+                      span
+                        i.fa.fa-th-list
+                        {{loop.index}}楼
+
+                  p.main-content {{c.content|content}}
+
+      
+      .box.comment-add
+        .box-title
+          |添加新的讨论
+        .box-content
+          .regform
+            form.light-form(action="/topic/{{topic_id}}",method="POST")
+              if g.user
+                {{form.csrf_token }}
+                {{form.content(id="comment-content")}}
+                if form.content.errors
+                  p(style="color:#f00")
+                    for error in form.content.errors
+                      {{error}}
+                button.light-btn.btn1 提交
+              else
+                a.light-btn.btn1(href="/login") 登陆
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                a.light-btn.btn2(href="/register") 注册
+               
+    #aside
+      include base/my
+      if node.aside
+        {{node.aside}} 
