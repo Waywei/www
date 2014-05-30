@@ -28,3 +28,5 @@ BASEURL = 'http://www.bearwave.com/'
 SURL = 'http://s.bearwave.com/'
 BASETITLE = 'BEARWAVE'
 EMAIL = "syllor@bearwave.com"
+
+DEV = True
