@@ -34,14 +34,14 @@
         p
           {{config.BASETITLE}} 第{{user.id}}位成员 - 
           加入时间 {{user.create_time|time}}
-        p
+        p(style="font-size:12px")
             if g.user and g.user != user
               if isFav
-                a.favuser.pure-button.btn2(href="/api/v1/fav/user/{{user.id}}") 
+                a.favuser.light-btn.btn2(href="/api/v1/fav/user/{{user.id}}") 
                   i.fa.fa-star
                   span 取消关注
               else
-                a.favuser.pure-button.btn1(href="/api/v1/fav/user/{{user.id}}") 
+                a.favuser.light-btn.btn1(href="/api/v1/fav/user/{{user.id}}") 
                   i.fa.fa-star
                   span 特别关注
         
