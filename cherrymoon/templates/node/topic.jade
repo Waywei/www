@@ -34,7 +34,7 @@ block main
 
             p.main-content {{topic.content|content}} 
             .div(style="margin:20px 0px;font-size:12px")
-                a.light-btn.btn1(href="#") 
+                a.light-btn.btn1(href="http://service.weibo.com/share/share.php?title={{topic.title|e}}&url={{config.BASEURL}}topic/{{topic.id}}")
                   .fa.fa-weibo
                   分享微博
                 &nbsp;
