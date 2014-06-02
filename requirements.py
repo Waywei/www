@@ -13,3 +13,4 @@ redis
 psycopg2
 
 pillow
+requests
