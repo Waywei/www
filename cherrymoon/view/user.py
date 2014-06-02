@@ -103,7 +103,7 @@ def forgetpassword():
             r.expire("resetuser:%s" % email,60*60*24)
 
             subject = u"重新设置密码-BEARWAVE"
-            reseturl = "http://www.bearhour.com/resetpassword/"+str(uuid) 
+            reseturl = "http://www.bearwave.com/resetpassword/"+str(uuid) 
             text = '''
 
             这是一封系统自动发送的邮件，不能直接回复。
