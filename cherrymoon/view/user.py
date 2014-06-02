@@ -4,19 +4,19 @@ from flask import g,request,flash,session
 from flask import abort
 from datetime import *
 from cherrymoon.ext.db import db,r
-from cherrymoon.ext.helper import k
+from cherrymoon.ext.helper import k, send_email
 from cherrymoon.ext.helper import csrf_check
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
 from cherrymoon.models import Page
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
-from cherrymoon.forms import FindingForm,UploadForm
+from cherrymoon.forms import FindingForm,UploadForm,ForgetForm,ResetPasswordForm
 from cherrymoon.redis.fav_topic import *
 from cherrymoon.redis.fav_node import *
 from cherrymoon.redis.fav_user import *
-
-
+from uuid import uuid4
+import requests
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -32,7 +32,7 @@ def register():
         session['id'] = user.id
         session['token'] = user.token
         flash(u'注册成功','success')
-        return redirect('/setting')
+        return redirect('/member/'+str(user.id))
     return render('/register.jade',locals())
 
 @app.route('/login',methods=['GET','POST'])
@@ -76,6 +76,71 @@ def setting():
 @require_login
 def avatar():
     return render('/avatar.jade',locals())
+
+
+@app.route('/forgetpassword',methods=['GET','POST'])
+def forgetpassword():
+    form = ForgetForm()
+    if form.validate_on_submit():
+        email = form.data['email'].lower()
+        name = form.data['username'].lower()
+        try:
+            user = User.query.filter_by(email = email).first()
+        except:
+            user = None
+        if user and user.username == name:
+            result = r.get("resetuser:%s" % email)
+            if result:
+                finished = k()
+                finished.title = u"重新设置密码"
+                finished.content = u"重新设置密码的功能在24小时只能使用一次"
+                return render('finished.jade',locals())
+
+            uuid = uuid4() 
+            r.set("reset:%s" % uuid,email)
+            r.expire("reset:%s" % uuid,60*60*24)
+            r.set("resetuser:%s" % email,"1")
+            r.expire("resetuser:%s" % email,60*60*24)
+
+            subject = u"重新设置密码-BEARWAVE"
+            reseturl = "http://www.bearhour.com/resetpassword/"+str(uuid) 
+            text = '''
+
+            这是一封系统自动发送的邮件，不能直接回复。
+            如果当前操作不是您本人的所为，请忽略这个邮件，但这类操作意味着可能有人对您的隐私有兴趣。
+
+            修改密码可以访问下面的连接
+            '''
+            msg = text+reseturl
+            send_email(email,subject,msg)
+            finished = k()
+            finished.title = u"重新设置密码"
+            finished.content = u"邮件已发送，请注意垃圾邮件箱"
+            return render('finished.jade',locals())
+        else:
+            error = u"邮箱与用户名不匹配"
+
+    return render('/forgetpassword.jade',locals())
+
+
+@app.route('/resetpassword/<uuid>',methods=['GET','POST'])
+def resetpassword(uuid):
+    uid = str(uuid)
+    mail = r.get("reset:%s" % uuid)
+    if mail:
+        form = ResetPasswordForm();
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=mail).first_or_404()
+            user.change_password(form.password.data)
+            db.session.commit()
+            flash(u"密码修改成功",'success')
+            return redirect("/login")
+
+        return render('resetpassword.jade',locals())
+        
+    else:
+        return u"您的链接已经过期，发送后24小时内使用才有效"
+
 
 @app.route('/member/<int:id>')
 def memberinfo(id):

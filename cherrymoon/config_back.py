@@ -30,3 +30,5 @@ BASETITLE = 'BEARWAVE'
 EMAIL = "syllor@bearwave.com"
 
 DEV = True
+
+MAILGUN = ''

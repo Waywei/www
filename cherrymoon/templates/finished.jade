@@ -1,0 +1,19 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title
+  title {{config.BASETITLE}} - {{finished.title}}
+block main
+    #main
+      .breadcrumb
+        a(href="/") {{config.BASETITLE}}
+        |  >  
+        span {{finished.title}}
+      #content
+        .box
+          .box-title
+            | {{finished.title}}
+          .box-content
+            div(style="padding:10px 20px")
+              h2 {{finished.content}}
+      #aside
+        include base/my.jade

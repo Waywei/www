@@ -7,6 +7,7 @@ import functools
 from flask import redirect,flash
 from cherrymoon.ext.db import db
 from uuid import uuid4
+import requests
 
 def render(tmp,items):
     return render_template(tmp,**items)
@@ -57,3 +58,14 @@ def csrf_check():
     token = str(session.pop('_csrf_token',None))
     if not token or token != request.form["_csrf_token"]:
         abort(403)
+
+def send_email(to,subject,text):
+    requests.post(
+        "https://api.mailgun.net/v2/bearwave.com/messages",
+        auth=("api", db.app.config['MAILGUN']),
+        data={"from": "bearwave <postmaster@bearwave.com>",
+              "to": [to],
+              "subject": subject,
+              "text": text})
+
+

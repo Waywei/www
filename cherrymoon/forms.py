@@ -93,6 +93,20 @@ class CommentForm(Form):
             validators=[Required(message=u'评论的内容不能为空')]
             )
 
+
+class ForgetForm(Form):
+    username = TextField(u'用户名',validators=[DataRequired()])
+    email    = EmailField(u'邮箱账号',validators=[DataRequired()])
+
+
+class ResetPasswordForm(Form):
+    password = PasswordField(u'密码',validators=[DataRequired()])
+    confirm = PasswordField(u'再次输入',validators=[DataRequired()])
+
+    def validate_confirm(self, field):
+        if field.data != self.password.data:
+            raise ValueError(u"两次输入的密码不一致")
+
 imglist = ('jpg','png','jpeg')
 class UploadForm(Form):
     uploads = FileField(u'选择图像文件',
