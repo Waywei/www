@@ -1138,6 +1138,9 @@ a:hover {
     display: inline-block;
     padding: 5px;
   }
+  .allnode .item br {
+    display: none;
+  }
   .allnode .item p {
     display: none;
   }
