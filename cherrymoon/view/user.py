@@ -12,9 +12,7 @@ from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
 from cherrymoon.forms import FindingForm,UploadForm,ForgetForm,ResetPasswordForm
-from cherrymoon.redis.fav_topic import *
-from cherrymoon.redis.fav_node import *
-from cherrymoon.redis.fav_user import *
+from cherrymoon.models import FavUser, FavTopic, FavNode
 from uuid import uuid4
 import requests
 
@@ -148,7 +146,7 @@ def memberinfo(id):
     if g.user:
         mid = str(g.user.id)
         tid = str(id)
-        isFav = user_is_fav(mid,tid)
+        isFav = FavUser.query.filter_by(user_id=mid, target_id=tid).first()
     else:
         ifFav = None
     return render('/member/member.jade',locals())
@@ -160,7 +158,7 @@ def membertopic(id):
     if g.user:
         mid = str(g.user.id)
         tid = str(id)
-        isFav = user_is_fav(mid,tid)
+        isFav = FavUser.query.filter_by(user_id=mid, target_id=tid).first()
     else:
         ifFav = None
 
@@ -173,7 +171,7 @@ def memberreply(id):
     if g.user:
         mid = str(g.user.id)
         tid = str(id)
-        isFav = user_is_fav(mid,tid)
+        isFav = FavUser.query.filter_by(user_id=mid, target_id=tid).first()
     else:
         ifFav = None
 
@@ -183,7 +181,8 @@ def memberreply(id):
 @require_login
 def memberfavtopic():
     user = g.user
-    tid = fav_topic_list(str(g.user.id))
+    favs = FavTopic.query.filter_by(user_id=user.id).limit(30)
+    tid = [x.topic_id for x in favs]
     favtopic = Topic.query.filter(Topic.id.in_(tid)).all()
     return render('/my/fav-topic.jade',locals())
 
@@ -191,7 +190,8 @@ def memberfavtopic():
 @require_login
 def memberfavnode():
     user = g.user
-    tid = fav_node_list(str(g.user.id))
+    favs = FavNode.query.filter_by(user_id=user.id).limit(30)
+    tid = [x.node_id for x in favs]
     favnode = Node.query.filter(Node.id.in_(tid)).all()
     return render('/my/fav-node.jade',locals())
 
@@ -199,6 +199,7 @@ def memberfavnode():
 @require_login
 def memberfavmember():
     user = g.user
-    tid = fav_user_list(str(g.user.id))
-    favuser = User.query.filter(User.id.in_(tid)).all()
+    favs = FavUser.query.filter_by(user_id=user.id).limit(30)
+    tid = [x.target_id for x in favs]
+    favuser = User.query.filter(User.id.in_(tid)).limit(30)
     return render('/my/fav-member.jade',locals())

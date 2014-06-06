@@ -1,44 +1,55 @@
 from cherrymoon import app
 from flask import g,request,jsonify
-from cherrymoon.redis.fav_user import user_is_fav,fav_user,unfav_user
-from cherrymoon.redis.fav_node import node_is_fav,fav_node,unfav_node
-from cherrymoon.redis.fav_topic import topic_is_fav,fav_topic,unfav_topic
+from cherrymoon.ext.db import db
+from cherrymoon.models import FavTopic, FavUser, FavNode
 from cherrymoon.ext.helper import require_login
 
-@app.route('/api/v1/fav/user/<int:target>',methods=['GET','POST'])
+@app.route('/api/v1/fav/user/<int:target>',methods=['POST'])
 @require_login
 def user(target):
-    mid = str(g.user.id)
+    myid = g.user.id
     tid = str(target)
-    if user_is_fav(mid,tid):
-        unfav_user(mid,tid)
+    fav = FavUser.query.filter_by(user_id=myid,target_id=tid).first()
+    if fav:
+        db.session.delete(fav)
+        db.session.commit()
         return jsonify(action="unfav")
     else:
-        fav_user(mid,tid)
+        favuser = FavUser(user_id=myid,target_id=tid)
+        db.session.add(favuser)
+        db.session.commit()
         return jsonify(action="fav")
 
-@app.route('/api/v1/fav/node/<int:target>',methods=['GET','POST'])
+@app.route('/api/v1/fav/node/<int:target>',methods=['POST'])
 @require_login
 def node(target):
-    mid = str(g.user.id)
+    myid = str(g.user.id)
     tid = str(target)
-    if node_is_fav(mid,tid):
-        unfav_node(mid,tid)
+    fav = FavNode.query.filter_by(user_id=myid,node_id=tid).first()
+    if fav:
+        db.session.delete(fav)
+        db.session.commit()
         return jsonify(action="unfav")
     else:
-        fav_node(mid,tid)
+        favnode = FavNode(user_id=myid,node_id=tid)
+        db.session.add(favnode)
+        db.session.commit()
         return jsonify(action="fav")
 
 @app.route('/api/v1/fav/topic/<int:target>',methods=['GET','POST'])
 @require_login
 def topic(target):
-    mid = str(g.user.id)
+    myid = str(g.user.id)
     tid = str(target)
-    if topic_is_fav(mid,tid):
-        unfav_topic(mid,tid)
+    fav = FavTopic.query.filter_by(user_id=myid,topic_id=tid).first()
+    if fav:
+        db.session.delete(fav)
+        db.session.commit()
         return jsonify(action="unfav")
     else:
-        fav_topic(mid,tid)
+        favtopic = FavTopic(user_id=myid,topic_id=tid)
+        db.session.add(favtopic)
+        db.session.commit()
         return jsonify(action="fav")
 
 

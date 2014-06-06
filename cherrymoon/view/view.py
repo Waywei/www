@@ -8,13 +8,11 @@ from cherrymoon.ext.helper import k
 from cherrymoon.ext.helper import csrf_check
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
 from cherrymoon.models import Page
+from cherrymoon.models import FavUser, FavNode, FavTopic
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
 from cherrymoon.forms import FindingForm,UploadForm
-from cherrymoon.redis.fav_topic import *
-from cherrymoon.redis.fav_node import *
-from cherrymoon.redis.fav_user import *
 
 
 @app.route('/')
@@ -52,7 +50,7 @@ def topic_list(slug,page=1):
         if g.user:
             mid = str(g.user.id)
             tid = str(node.id)
-            isFav = node_is_fav(mid,tid)
+            isFav = FavNode.query.filter_by(user_id=mid, node_id=tid).first()
         topics = Topic.query.filter_by(node_id=node.id)\
             .order_by(Topic.update_time.desc()).paginate(page,per_page=20)
     except:
@@ -88,7 +86,7 @@ def topic_detail(topic_id):
     if g.user:
         mid = str(g.user.id)
         tid = str(topic_id)
-        isFav = topic_is_fav(mid,tid)
+        isFav = FavTopic.query.filter_by(user_id=mid, topic_id=tid).first()
     if g.user:
         form = CommentForm()
         if form.validate_on_submit():

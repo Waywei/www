@@ -170,3 +170,23 @@ class Comment(db.Model):
     def __unicode__(self):
         return self.content
     
+
+class FavTopic(db.Model):
+    id          = Column(Integer, primary_key = True)
+    user_id     = db.Column(db.Integer,index=True, nullable=False)
+    topic_id    = db.Column(db.Integer,index=True, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class FavNode(db.Model):
+    id          = Column(Integer, primary_key = True)
+    user_id     = db.Column(db.Integer,index=True, nullable=False)
+    node_id     = db.Column(db.Integer,index=True, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class FavUser(db.Model):
+    id          = Column(Integer, primary_key = True)
+    user_id     = db.Column(db.Integer,index=True, nullable=False)
+    target_id   = db.Column(db.Integer,index=True, nullable=False)
+    create_time = db.Column(db.DateTime, default=datetime.utcnow)

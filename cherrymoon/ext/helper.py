@@ -34,14 +34,14 @@ def require_login(f):
 def require_admin(f):
     @functools.wraps(f)
     def wrapper(*args,**kw):
-        if not g.user and g.user.id == 2:
+        if not g.user and g.user.id == 1:
             return redirect('/')
         return f(*args,**kw)
     return wrapper
 
 def is_admin():
     try:
-        if g.user and g.user.id ==2:
+        if g.user and g.user.id ==1:
             return True
     except:
         return False
