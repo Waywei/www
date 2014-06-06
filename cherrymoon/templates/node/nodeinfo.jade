@@ -14,11 +14,11 @@
       |     
       if g.user
         if isFav
-          a.favtopic.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
+          a.favnode.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
             i.fa.fa-star
             span 取消收藏
         else
-          a.favtopic.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
+          a.favnode.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
             i.fa.fa-star
             span 收藏节点
 

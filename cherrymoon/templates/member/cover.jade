@@ -26,14 +26,6 @@
     .membercover
       .avatar
         {{user.email | avatar}}
-      .detail
-        h3
-          {{user.username}}
-        p
-          所在城市:{{user.city|e}} 
-        p
-          {{config.BASETITLE}} 第{{user.id}}位成员 - 
-          加入时间 {{user.create_time|time}}
         p(style="font-size:12px")
             if g.user and g.user != user
               if isFav
@@ -44,4 +36,14 @@
                 a.favuser.light-btn.btn1(href="/api/v1/fav/user/{{user.id}}") 
                   i.fa.fa-star
                   span 特别关注
-        
+ 
+      .detail
+        h3
+          {{user.username}}
+        p
+          所在城市:{{user.city|e}} 
+        p
+          {{config.BASETITLE}} 第{{user.id}}位成员 
+        p
+          加入时间 {{user.create_time|time}}
+       
