@@ -7,7 +7,7 @@ from cherrymoon.ext.db import db,r
 from cherrymoon.ext.helper import k
 from cherrymoon.ext.helper import csrf_check
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
-from cherrymoon.models import Page
+from cherrymoon.models import Page,Notification
 from cherrymoon.models import FavUser, FavNode, FavTopic
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
@@ -66,6 +66,7 @@ def topic_add(slug):
     node.topic_count = Topic.query.filter_by(node_id=node.id).count() 
     if form.validate_on_submit():
         topic = Topic(**form.data)
+        topic.content = topic.content.strip()
         topic.node = node
         topic.user = g.user
         topic.ip = request.remote_addr
@@ -91,6 +92,7 @@ def topic_detail(topic_id):
         form = CommentForm()
         if form.validate_on_submit():
             comment = Comment(**form.data)
+            comment.content = comment.content.strip()
             comment.topic = topic
             comment.user = g.user
             comment.ip   = request.remote_addr
