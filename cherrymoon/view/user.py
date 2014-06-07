@@ -95,10 +95,12 @@ def forgetpassword():
                 return render('finished.jade',locals())
 
             uuid = uuid4() 
-            r.set("reset:%s" % uuid,email)
-            r.expire("reset:%s" % uuid,60*60*24)
-            r.set("resetuser:%s" % email,"1")
-            r.expire("resetuser:%s" % email,60*60*24)
+            pipe = r.pipeline()
+            pipe.set("reset:%s" % uuid,email)
+            pipe.expire("reset:%s" % uuid,60*60*24)
+            pipe.set("resetuser:%s" % email,"1")
+            pipe.expire("resetuser:%s" % email,60*60*24)
+            pipe.execute()
 
             subject = u"重新设置密码-BEARWAVE"
             reseturl = "http://www.bearwave.com/resetpassword/"+str(uuid) 
