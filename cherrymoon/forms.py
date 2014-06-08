@@ -18,8 +18,8 @@ class SignupForm(Form):
         ])
     username = TextField(u'用户名',validators=[
             Required(message=u'用户名不能为空'),
-            Length(min=2,max=16),
-            Regexp(ur'^[\u4e00-\u9fa5_a-zA-Z0-9]+$',message=u"用户名只能是字母中文数字跟下划线")
+            Length(min=2,max=10),
+            Regexp(ur'^[_a-zA-Z0-9]+$',message=u"用户名只能是字母数字跟下划线,小于10个字符")
         ])
     password = PasswordField(u'登陆密码', validators=[
             Required(message=u'密码不能为空')

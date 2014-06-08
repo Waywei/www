@@ -21,16 +21,16 @@ def timesince(value):
         return u'%s年前'% num
     if delta.days > 30:
         num = delta.days/30
-        return u'%s 个月前'% num
+        return u'%s个月前'% num
     if delta.days > 0:
         num = delta.days
-        return u'%s 天前'% num
+        return u'%s天前'% num
     if delta.seconds > 3600:
         num = delta.seconds/3600
-        return u'%s 小时前'% num
+        return u'%s小时前'% num
     if delta.seconds > 60:
         num = delta.seconds/60
-        return u'%s 分钟前'% num
+        return u'%s分钟前'% num
     return u'刚刚'
 
 @app.template_filter('time')

@@ -5,8 +5,10 @@ from flask import session, abort
 from flask import request, g
 import functools
 from flask import redirect,flash
-from cherrymoon.ext.db import db
+from cherrymoon.ext.db import db,r
 from uuid import uuid4
+from cherrymoon.redis.counter import Counter
+notify = Counter()
 import requests
 
 def render(tmp,items):
@@ -19,6 +21,7 @@ def get_current_user():
             return None
         if user.token != session['token']:
             return None
+        user.notify = notify.get("notify:user%s" % user.id) 
         return user
     return None
 

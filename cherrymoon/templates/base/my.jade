@@ -7,7 +7,6 @@ if g.user
         a(href="/my/favuser") 
           i.fa.fa-users
           特别关注  
-
       p
         a(href="/my/favtopic") 
           i.fa.fa-thumbs-up
@@ -16,6 +15,12 @@ if g.user
         a(href="/my/favnode") 
           i.fa.fa-leaf
           收藏的节点
+      .line
+      p(style="font-size:11px")
+        if g.user.notify != "0"
+          a.light-btn.btn1(href="/notification") 您有{{g.user.notify}}条新的通知
+        else
+          a(href="/notification") 没有新的通知
       .line
       p(style="font-size:11px")
         a.light-btn.btn1(href="/setting") 个人设置

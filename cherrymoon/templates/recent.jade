@@ -38,7 +38,7 @@ block main
       if topics.has_prev or topics.has_next
         .page
           if topics.has_prev
-            a.left.lignt-btn.btn1(href='/recent/page/{{topics.prev_num}}') 上一页
+            a.left.light-btn.btn1(href='/recent/page/{{topics.prev_num}}') 上一页
           if topics.has_next
             a.right.light-btn.btn1(href='/recent/page/{{topics.next_num}}') 下一页
     #aside

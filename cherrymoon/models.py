@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-  
 from cherrymoon.ext.db import db
 from werkzeug import security
  
@@ -18,8 +19,8 @@ class User(db.Model):
     
     hp          = Column(Integer,default="200")
 
-    city        = Column(String(40),default='')
     description = Column(String(500),default='')
+    city        = Column(String(40),default='')
     website     = Column(String(50),default='')
     weibo       = Column(String(50),default='')
     instagram   = Column(String(50),default='')
@@ -27,6 +28,12 @@ class User(db.Model):
     twitter     = Column(String(50),default='')
     renren      = Column(String(50),default='')
     facebook    = Column(String(50),default='')
+    weixin      = Column(String(50),default='')
+    douban      = Column(String(50),default='')
+    other1      = Column(String(50),default='')
+    other2      = Column(String(50),default='')
+    other3      = Column(String(50),default='')
+    other4      = Column(String(50),default='')
 
     create_time = Column(DateTime,default=datetime.utcnow)
 
@@ -190,3 +197,21 @@ class FavUser(db.Model):
     user_id     = db.Column(db.Integer,index=True, nullable=False)
     target_id   = db.Column(db.Integer,index=True, nullable=False)
     create_time = db.Column(db.DateTime, default=datetime.utcnow)
+
+class Notification(db.Model):
+    ''' 
+        n_type 
+        1: 回复你
+        2: 回复中提到你
+        3: 话题中提到你
+    '''
+    id          = Column(Integer, primary_key = True)
+    user_id     = db.Column(db.Integer,index=True, nullable=False)
+    action_id   = Column(Integer,db.ForeignKey('user.id'),nullable = False)
+    action      = db.relationship('User',lazy='joined')
+    n_type      = db.Column(db.Integer, nullable=False)
+    title       = Column(String(140),nullable = False)
+    topic_id    = db.Column(db.Integer, nullable=False)
+    content     = Column(Text)
+    create_time = db.Column(db.DateTime, default=datetime.utcnow)
+
