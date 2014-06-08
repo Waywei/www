@@ -2,10 +2,10 @@ extends base/layout
 block title
   title {{config.BASETITLE}} - 首页
 block main
-  .talkcover(style="background:#000")
+  .talkcover(style="background:#57ab69")
     .title
       h1 {{config.BASETITLE}}
-      h2 寻找 思考 分享 交流
+      h2 分享 发现 思考 交流
       .node
         for n in node
           a(href="node/{{n.slug}}") {{n.name|e}}
