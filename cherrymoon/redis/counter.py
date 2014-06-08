@@ -12,7 +12,7 @@ class Counter(object):
         if value:
             return value
         else:
-            return None
+            return False
 
     def reset(self,counter):
         value = r.set( counter, 0)

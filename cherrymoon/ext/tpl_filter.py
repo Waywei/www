@@ -90,7 +90,7 @@ def mentions(value):
             m_id = re.findall('@([a-zA-Z0-9\_]+\.?)', m)
             if (len(m_id) > 0):
                 if (m_id[0].endswith('.') != True):
-                    value = value.replace('@' + m_id[0], '@<a href="/member/' + m_id[0] + '">' + m_id[0] + '</a>')
+                    value = value.replace('@' + m_id[0], '@<a href="/m/' + m_id[0] + '">' + m_id[0] + '</a>')
         return value
     else:
         return value

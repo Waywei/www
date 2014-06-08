@@ -140,7 +140,13 @@ def resetpassword(uuid):
         
     else:
         return u"您的链接已经过期，发送后24小时内使用才有效"
-
+@app.route('/m/<username>')
+def memberslug(username):
+    user = User.query.filter_by(username=username).first()
+    if user:
+        return redirect("/member/"+str(user.id),code=301)
+    else:
+        return "这个用户不存在"
 
 @app.route('/member/<int:id>')
 def memberinfo(id):
