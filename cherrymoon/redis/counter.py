@@ -16,7 +16,7 @@ class Counter(object):
 
     def reset(self,counter):
         value = r.set( counter, 0)
-        return 0
+        return False
 
 #notify = Counter()
 #notify.incr("notify:user1")
