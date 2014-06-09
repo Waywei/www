@@ -11,6 +11,8 @@ from cherrymoon.redis.counter import Counter
 notify = Counter()
 import requests
 
+admin_list = [1,2,3]
+
 def render(tmp,items):
     return render_template(tmp,**items)
 
@@ -37,14 +39,14 @@ def require_login(f):
 def require_admin(f):
     @functools.wraps(f)
     def wrapper(*args,**kw):
-        if not g.user and g.user.id == 1:
+        if not g.user and g.user.id in admin_list:
             return redirect('/')
         return f(*args,**kw)
     return wrapper
 
 def is_admin():
     try:
-        if g.user and g.user.id ==1:
+        if g.user and g.user.id in admin_list:
             return True
     except:
         return False
