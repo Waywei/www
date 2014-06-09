@@ -66,7 +66,6 @@ class SettingForm(Form):
     facebook = URLField(u'facebook地址')
     description = TextAreaField(u'个人介绍')
     instagram  = URLField(u'instagram地址')
-    douban  = URLField(u'豆瓣地址')
 
     weixin = TextField(u'微信')
     other1 = TextField(u'qq')

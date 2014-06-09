@@ -24,7 +24,16 @@ block main
         .box-title
           | 相关链接
         .box-content
+
           .mitem
+            if user.weixin
+              p
+                .fa.fa-wechat 
+                span {{user.weixin|e}}
+            if user.other1
+              p
+                .fa.fa-qq 
+                span {{user.other1|e}}
             if user.website
               p.link
                 a(href="{{user.website|e}}",target="_blank")
@@ -44,7 +53,6 @@ block main
               p.link
                 .fa.fa-flickr
                 a(href="{{user.flickr|e}}",target="_blank") {{user.flickr|e}}
-
 
             if user.twitter
               p.link
