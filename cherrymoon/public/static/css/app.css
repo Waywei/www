@@ -975,7 +975,13 @@ a:hover {
   display: block;
 }
 .membercover .detail {
-  margin-left: 120px;
+  margin-left: 110px;
+}
+.membercover .detail h3 {
+  margin: 0px;
+}
+.membercover .detail p {
+  margin: 5px 0px;
 }
 .subnav {
   background: #fff;

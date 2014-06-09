@@ -68,6 +68,7 @@ def setting():
         form.populate_obj(user)
         db.session.commit()
         flash(u'设置成功','success')
+        return redirect('/member/'+str(g.user.id))
     return render('/setting.jade',locals())
 
 @app.route('/avatar',methods=['GET','POST'])

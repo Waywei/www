@@ -20,10 +20,18 @@ block main
               {{render_field(form.city)}}
               {{render_field(form.description)}}
               br
-              br
+              {{render_field(form.weixin)}}
+              {{render_field(form.other1)}}
+              .line
+              .group
+                .text
+                .input-item
+                  网站的地址必须以http://开头
+
               {{render_field(form.website)}}
               {{render_field(form.weibo)}}
               {{render_field(form.instagram)}}
+              {{render_field(form.douban)}}
               {{render_field(form.flickr)}}
               {{render_field(form.twitter)}}
               {{render_field(form.renren)}}
