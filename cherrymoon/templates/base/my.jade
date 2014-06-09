@@ -17,7 +17,7 @@ if g.user
           收藏的节点
       .line
       p(style="font-size:11px")
-        if g.user.notify != "0" 
+        if g.user.notify and g.user.notify != "0" 
           a.light-btn.btn1(href="/notification") 您有{{g.user.notify}}条新的通知
         else
           a(href="/notification") 没有新的通知
