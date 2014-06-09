@@ -15,7 +15,10 @@ block main
             for n in nodes
               .item
                 h3 
-                  a(href="/node/{{n.slug}}") {{n.name | e }}
+                  a(href="/node/{{n.slug}}") 
+                    if n.node_type == 2
+                      .fa.fa-lock
+                    {{n.name | e }}
                 p.time 创建于{{n.create_time|time}}
                 p {{n.description|e}}
 

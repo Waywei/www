@@ -15,7 +15,10 @@ block main
       .box
         .box-content
           .topic-detail
-            h1.title {{topic.title|e}}
+            h1.title 
+              if node.node_type == 2
+                .fa.fa-lock
+              {{topic.title|e}}
             .info 
                 span
                   a(href="/member/{{topic.user.id}}") 
@@ -63,7 +66,7 @@ block main
                           {{c.user.username|e}}
                       span
                         i.fa.fa-bar-chart-o
-                        |发布于 {{c.create_time|timesince}}
+                        {{c.create_time|timesince}}
                       span
                         i.fa.fa-th-list
                         {{loop.index}}楼

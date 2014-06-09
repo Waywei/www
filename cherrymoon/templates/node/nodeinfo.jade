@@ -5,6 +5,8 @@
 
   .detail
     h2 
+      if node.node_type == 2
+        .fa.fa-lock
       {{node.name | e}} 
     p(style="font-size:11px;color:#999")
       共有{{node.topic_count}}个话题

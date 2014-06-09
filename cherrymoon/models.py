@@ -106,8 +106,8 @@ class Looking(db.Model):
 class Node(db.Model):
     '''
     node_type 
-    1: everyone can see
-    2: need login 
+    1: 所有人可见
+    2: 必须注册才可以看到 
     '''
     id          = Column(Integer, primary_key = True)
     avatar      = Column(String(200),nullable  = False)

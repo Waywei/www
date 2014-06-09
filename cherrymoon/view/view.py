@@ -18,7 +18,6 @@ from cherrymoon.redis.counter import Counter
 
 notify = Counter()
 
-
 @app.route('/')
 def index():
     topics = Topic.query.order_by(Topic.update_time.desc()).limit(10)
@@ -36,7 +35,10 @@ def node_view():
 @app.route('/recent/page/<int:page>')
 def recent_topic(page=1):
     try:
-        show_node_type = (1,2)
+        if g.user:
+            show_node_type = (1,2)
+        else:
+            show_node_type = (1)
         show_nodes = Node.query.filter(Node.node_type.in_(show_node_type)).all()
         showid = [x.id for x in show_nodes]
         topics = Topic.query.filter(Topic.node_id.in_(showid))\
@@ -50,6 +52,10 @@ def recent_topic(page=1):
 def topic_list(slug,page=1):
     try:
         node = Node.query.filter_by(slug=slug).first_or_404()
+        if not g.user and node.node_type == 2:
+            flash(u"当前节点是私密的节点，需要登陆后才可以访问","warning")
+            return redirect("/login")
+
         node.topic_count = Topic.query.filter_by(node_id=node.id).count() 
         if g.user:
             mid = str(g.user.id)
@@ -69,6 +75,7 @@ def topic_add(slug):
     form = TopicForm()
     node = Node.query.filter_by(slug=slug).first();
     node.topic_count = Topic.query.filter_by(node_id=node.id).count() 
+
     if form.validate_on_submit():
         topic = Topic(**form.data)
         topic.content = topic.content.strip()
@@ -110,6 +117,11 @@ def notiuser(content):
 @app.route('/topic/<int:topic_id>',methods=['GET','POST'])
 def topic_detail(topic_id):
     topic = Topic.query.get_or_404(topic_id)
+
+    if not g.user and topic.node.node_type == 2:
+        flash(u"当前话题属于私密节点,需要登陆后才可以访问","warning")
+        return redirect("/login")
+
     node = Node.query.filter_by(id= topic.node_id).first()
     topic.hits += 1
     db.session.commit()
