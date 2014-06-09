@@ -26,7 +26,7 @@ RECAPTCHA_OPTIONS = {'theme': 'white'}
 
 BASEURL = 'http://www.bearwave.com/'
 SURL = 'http://s.bearwave.com/'
-BASETITLE = 'BEARWAVE'
+BASETITLE = 'bearwave'
 EMAIL = "syllor@bearwave.com"
 
 DEV = True
