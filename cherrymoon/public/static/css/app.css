@@ -1055,7 +1055,7 @@ a:hover {
 }
 .node-info .action {
   padding-top: 10px;
-  font-size: 12px;
+  font-size: 11px;
 }
 .line {
   height: 1px;
@@ -1161,5 +1161,14 @@ a:hover {
   }
   .topic-detail .title {
     font-size: 18px;
+  }
+  .node-info .avatar {
+    width: 80px;
+  }
+  .node-info .avatar a {
+    width: 80px;
+  }
+  .node-info .detail {
+    margin-left: 90px;
   }
 }
