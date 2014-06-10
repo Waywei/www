@@ -15,6 +15,7 @@ from cherrymoon.forms import FindingForm,UploadForm,ForgetForm,ResetPasswordForm
 from cherrymoon.models import FavUser, FavTopic, FavNode
 from uuid import uuid4
 import requests
+from gravatar import Gravatar
 
 @app.route('/register',methods=['GET','POST'])
 def register():
@@ -25,6 +26,10 @@ def register():
 
     if form.validate_on_submit():
         user = User(**form.data)
+        img = Gravatar(user.email, secure=False, size=100, rating='x').thumb
+        req = requests.get(img)
+        if req.status_code == 200:
+            user.avatar = "gravatar"
         db.session.add(user)
         db.session.commit()
         session['id'] = user.id
