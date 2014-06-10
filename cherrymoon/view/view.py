@@ -20,18 +20,19 @@ notify = Counter()
 
 @app.route('/')
 def index():
-    topics = Topic.query.order_by(Topic.update_time.desc()).limit(4)
+    topics = Topic.query.order_by(Topic.update_time.desc()).limit(4).all()
+    print topics
     for item in topics:
         item.content = item.content[0:80]+'...'
     interviews = Interview.query\
-            .order_by(Interview.create_time.desc()).limit(4)
+            .order_by(Interview.create_time.desc()).limit(4).all()
     for item in interviews:
         item.content = item.content[0:80]+ '...'
     nodelist = [1,2,3,4,5]
     node = Node.query.filter(Node.id.in_(nodelist))
     for n in node:
-        topics = Topic.query.filter_by(node_id = n.id)
-        n.topic_count = topics.count()
+        node_topic = Topic.query.filter_by(node_id = n.id)
+        n.topic_count = node_topic.count()
     return render('/index.jade',locals())
 
 @app.route('/node')
@@ -43,14 +44,8 @@ def node_view():
 @app.route('/recent/page/<int:page>')
 def recent_topic(page=1):
     try:
-        if g.user:
-            show_node_type = (1,2)
-        else:
-            show_node_type = (1)
-        show_nodes = Node.query.filter(Node.node_type.in_(show_node_type)).all()
-        showid = [x.id for x in show_nodes]
-        topics = Topic.query.filter(Topic.node_id.in_(showid))\
-            .order_by(Topic.update_time.desc()).paginate(page,per_page=30)
+        topics = Topic.query.order_by(Topic.update_time.desc())\
+            .paginate(page,per_page=30)
     except:
         topics = None
     return render('/recent.jade',locals())
