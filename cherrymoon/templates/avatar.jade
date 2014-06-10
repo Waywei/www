@@ -2,6 +2,36 @@
 extends base/layout
 block title 
   title {{config.BASETITLE}} - 头像设置
+block head
+  script(src="http://cdn.staticfile.org/webuploader/0.1.1/webuploader.min.js")
+  style
+    .webuploader-container {
+      position: relative;
+    }
+    .webuploader-element-invisible {
+      position: absolute !important;
+      clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+        clip: rect(1px,1px,1px,1px);
+    }
+    .webuploader-pick {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      background: #00b7ee;
+      padding: 10px 15px;
+      color: #fff;
+      text-align: center;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .webuploader-pick-hover {
+      background: #00a2d4;
+    }
+
+    .webuploader-pick-disable {
+      opacity: 0.6;
+      pointer-events:none;
+    }
 block main
   #main
     .breadcrumb
@@ -15,7 +45,66 @@ block main
           | 头像设置
         .box-content
           .regform
-            p 请用使用gavatar，图片存储下一阶段才会开放
+            .light-form
+              .group
+                .text
+                  上传头像
+                .input-item
+                  #filePicker 选择图片
+                  .avatar-show
+                    {{g.user|avatar}}
     #aside
       include base/my
+  script
+    (function( $ ){
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // swf文件路径
+        swf: 'http://cdn.staticfile.org/webuploader/0.1.1/Uploader.swf',
+
+        // 文件接收服务端。
+        //server: 'http://webuploader.duapp.com/server/fileupload.php',
+        server: 'http://up.qiniu.com',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        // 用来扩展一个添加上qiniu的token，这个可以用后端语言来生成!!!!!
+        formData: {
+          'token':'{{qiniutoken}}'
+        }
+    });
+    uploader.on( 'uploadError', function( file ) {
+      alert("error")
+    });
+    uploader.on( 'uploadSuccess', function( file ) {
+    //-console.log("uploadSuccess")
+    });
+    // uploadaccept 这个事件才可以拿到qiniu返回的数据 这时已经上传成功!!!!
+    uploader.on( 'uploadAccept', function( file, response ) {
+      //-console.log(response.hash)
+      $.ajax({
+        type: "POST",
+        url: "./api/v1/uploadavatar",
+        data: {
+          'url': response.hash
+        }
+      }).done(function( msg ) {
+        if( msg.action == "ok"){
+          window.location.reload();
+        }
+      })
+    });
+    })( jQuery );
+
 

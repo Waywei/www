@@ -15,7 +15,7 @@
       .userpanel
         if g.user
             a.avatar(href="/member/{{g.user.id}}")
-              {{g.user.email | avatar}}
+              {{g.user | savatar}}
             a(href="/setting") 设置
             a(href="/logout") 退出
         else

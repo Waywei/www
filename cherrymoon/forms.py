@@ -102,7 +102,6 @@ class ForgetForm(Form):
     username = TextField(u'用户名',validators=[DataRequired()])
     email    = EmailField(u'邮箱账号',validators=[DataRequired()])
 
-
 class ResetPasswordForm(Form):
     password = PasswordField(u'密码',validators=[DataRequired()])
     confirm = PasswordField(u'再次输入',validators=[DataRequired()])

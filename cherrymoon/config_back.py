@@ -29,6 +29,11 @@ SURL = 'http://s.bearwave.com/'
 BASETITLE = 'bearwave'
 EMAIL = "syllor@bearwave.com"
 
+
+QINIU_URL = "http://bearhour.qiniudn.com/"
+QINIU_END = "-avatar"
+
 DEV = True
 
 MAILGUN = ''
+

@@ -25,7 +25,7 @@
   .box-content
     .membercover
       .avatar
-        {{user.email | avatar}}
+        {{user | avatar}}
         p(style="font-size:12px")
             if g.user and g.user != user
               if isFav

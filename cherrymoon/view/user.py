@@ -17,6 +17,8 @@ from uuid import uuid4
 import requests
 from gravatar import Gravatar
 
+from qiniu import rs,conf
+
 @app.route('/register',methods=['GET','POST'])
 def register():
     if g.user:
@@ -26,8 +28,11 @@ def register():
 
     if form.validate_on_submit():
         user = User(**form.data)
-        img = Gravatar(user.email, secure=False, size=100, rating='x').thumb
-        req = requests.get(img)
+        imgurl = Gravatar(user.email, secure=False, size=100, rating='x')\
+                .thumb+'&d=404'
+        req = requests.get(imgurl)
+        print "qqqqq"
+        print req.status_code
         if req.status_code == 200:
             user.avatar = "gravatar"
         db.session.add(user)
@@ -79,6 +84,10 @@ def setting():
 @app.route('/avatar',methods=['GET','POST'])
 @require_login
 def avatar():
+    conf.ACCESS_KEY = app.config["QINIU_ACCESS_KEY"]
+    conf.SECRET_KEY = app.config["QINIU_SECRET_KEY"]
+    policy = rs.PutPolicy("bearwave")
+    qiniutoken = policy.token()
     return render('/avatar.jade',locals())
 
 

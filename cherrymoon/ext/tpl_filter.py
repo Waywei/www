@@ -7,9 +7,30 @@ from jinja2 import escape
 from gravatar import Gravatar
 
 @app.template_filter('avatar')
-def avatar(email):
-    img = Gravatar(email, secure=False, size=100, rating='x').thumb
-    return "<img src='"+img+"'/>"
+def avatar(user):
+    if user.avatar == "gravatar":
+        img =  Gravatar(user.email, secure=False, size=100, rating='x').thumb
+        return "<img src='%s'/>" % img
+    elif user.avatar == "":
+        img = app.config['AVATAR']
+        return "<img src='%s'/>" % img 
+    else:
+        img =  app.config['QINIU_URL']+user.avatar+"-avatar"
+        return "<img src='%s'/>" % img
+
+
+@app.template_filter('savatar')
+def savatar(user):
+    if user.avatar == "gravatar":
+        img =  Gravatar(user.email, secure=False, size=20, rating='x').thumb
+        return "<img src='%s'/>" % img
+    elif user.avatar == "":
+        img =  app.config['AVATAR']
+        return "<img src='%s'/>" % img 
+    else:
+        img = app.config['QINIU_URL']+user.avatar+"-savatar"
+        return "<img src='%s'/>" % img 
+
 
         
 @app.template_filter('timesince')

@@ -36,7 +36,7 @@ def node(target):
         db.session.commit()
         return jsonify(action="fav")
 
-@app.route('/api/v1/fav/topic/<int:target>',methods=['GET','POST'])
+@app.route('/api/v1/fav/topic/<int:target>',methods=['POST'])
 @require_login
 def topic(target):
     myid = str(g.user.id)
@@ -52,4 +52,15 @@ def topic(target):
         db.session.commit()
         return jsonify(action="fav")
 
-
+@app.route('/api/v1/uploadavatar',methods=['GET','POST'])
+def uploadavatar():
+    if not g.user:
+        return "stop fuck with me"
+    else:
+        try:
+            data = request.form['url']
+            g.user.avatar = data 
+            db.session.commit()
+            return jsonify(action="ok")
+        except:
+            return jsonify(action="error")
