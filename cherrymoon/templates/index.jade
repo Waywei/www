@@ -35,7 +35,7 @@ block main
         .box-content
           for t in interviews
             .index-item
-              img(src="{{t.cover|replace("F.jpeg","Fb.jpeg"))}}")
+              img(src='{{t.cover | replace("F.jpeg","Fb.jpeg")}}')
               .text
                 h2 
                   a(href="/interview/{{t.absurl}}") {{t.title | e}}
