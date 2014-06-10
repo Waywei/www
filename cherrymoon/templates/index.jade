@@ -35,11 +35,11 @@ block main
         .box-content
           for t in interviews
             .index-item
-              img(src="http://i.v2ex.co/46WOddsFb.jpeg")
+              img(src="{{t.cover|replace("F.jpeg","Fb.jpeg"))}}")
               .text
                 h2 
                   a(href="/interview/{{t.absurl}}") {{t.title | e}}
-                p {{t.content|e}}
+                p {{t.content |striptags| truncate(220,Ture, end='...')}}
                 p
                   a(href="/interview/{{t.absurl}}") 继续阅读
         .box-footer(style="text-align:right")
@@ -53,7 +53,7 @@ block main
               .text(style="padding-left:0px")
                 h2
                   a(href="/topic/{{t.id}}") {{t.title | e}}
-                p {{t.content}}
+                p {{t.content |striptags| truncate(120, True,end='...')}}
         .box-footer(style="text-align:right")
           a(href="/recent") 更多话题
     #aside

@@ -21,14 +21,9 @@ notify = Counter()
 @app.route('/')
 def index():
     topics = Topic.query.order_by(Topic.update_time.desc()).limit(4).all()
-    print topics
-    for item in topics:
-        item.content = item.content[0:80]+'...'
     interviews = Interview.query\
             .order_by(Interview.create_time.desc()).limit(4).all()
-    for item in interviews:
-        item.content = item.content[0:80]+ '...'
-    nodelist = [1,2,3,4,5]
+    nodelist = [1,2,3,4,5,6,7]
     node = Node.query.filter(Node.id.in_(nodelist))
     for n in node:
         node_topic = Topic.query.filter_by(node_id = n.id)
