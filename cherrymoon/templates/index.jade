@@ -1,37 +1,81 @@
 extends base/layout
 block title
   title {{config.BASETITLE}} - 首页
+block head
+  //-if config.DEV
+    //-script(src='{{config.SURL}}static/js/swipe.js')
+  //-else
+    //-script(src='http://cdn.staticfile.org/swipe/2.0/swipe.min.js')
+  //-script.
+    //-$(document).ready(function(){
+      //-window.mySwipe = new Swipe(document.getElementById('slider'), {
+        //-startSlide: 0,
+        //-speed: 400,
+        //-auto: 6000,
+        //-continuous: true,
+        //-disableScroll: false,
+        //-stopPropagation: false,
+        //-callback: function(index, elem) {},
+        //-transitionEnd: function(index, elem) {}
+      //-});
+    //-})
 block main
-  .talkcover(style="background:#57ab69")
-    .title
-      h1 {{config.BASETITLE}}
-      h2 分享 发现 思考 交流
-      .node
-        for n in node
-          a(href="node/{{n.slug}}") {{n.name|e}}
-
+  //-.slider
+    #slider.swipe
+      .swipe-wrap
+        .item
+          .inner-item
+              h1 {{config.BASETITLE}}
+              h2 分享 发现 思考 交流
+ 
   .index
+    #content
       .box
-        .box-title
-          最近的话题
-          a(href="/recent") 全部话题
+        .box-title 访谈
         .box-content
-          .topic-list
-            for t in topics
-              .item
-                .detail
-                    a(href="/topic/{{t.id}}") {{t.title | e}}
+          for t in interviews
+            .index-item
+              img(src="http://i.v2ex.co/46WOddsFb.jpeg")
+              .text
+                h2 
+                  a(href="/interview/{{t.absurl}}") {{t.title | e}}
+                p {{t.content|e}}
+                p
+                  a(href="/interview/{{t.absurl}}") 继续阅读
+        .box-footer(style="text-align:right")
+          a(href="/interview") 更多访谈
+
+      .box
+        .box-title 话题
+        .box-content
+          for t in topics
+            .index-item
+              .text(style="padding-left:0px")
+                h2
+                  a(href="/topic/{{t.id}}") {{t.title | e}}
+                p {{t.content}}
+        .box-footer(style="text-align:right")
+          a(href="/recent") 更多话题
+    #aside
+      include base/my
+      .box
+        .box-title 节点
+        .box-content
+          for n in node
+            .index-node
+              img(src="{{n.avatar}}")
+              .text
+                h3
+                  a(href="node/{{n.slug}}") 
+                    if n.node_type == 2
+                      .fa.fa-lock
+                    {{n.name|e}}
+                p
+                  {{n.description|e}}
+                p 共有{{n.topic_count}}话题
+
+
 
    
-      .box
-        .box-title
-          最新的访谈
-          a(href="/interview") 全部访谈
-        .box-content
-          .topic-list
-            for t in interviews
-              .item
-                .detail
-                    a(href="/interview/{{t.absurl}}") {{t.title | e}}
-       
-  
+
+             

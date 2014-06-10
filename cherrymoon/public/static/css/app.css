@@ -761,7 +761,7 @@ a:hover {
   background-size: cover;
   background-position: 50% 50%;
   min-width: 960px;
-  min-height: 600px;
+  min-height: 500px;
   position: relative;
 }
 .talkcover .title {
@@ -1068,6 +1068,40 @@ a:hover {
   background: #f2f2f2;
   margin: 10px 0px;
 }
+.slider {
+  width: 100%;
+  margin: 0 auto;
+}
+.slider .item {
+  background: #57ad69;
+  min-height: 500px;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  display: table;
+}
+.slider .item .inner-item {
+  display: table-cell;
+  vertical-align: middle;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: top center;
+}
+.slider .item .inner-item h1 {
+  font-size: 50px;
+  text-align: center;
+}
+.slider .item .inner-item h2 {
+  font-size: 30px;
+  font-weight: 100;
+  text-align: center;
+}
+.slider .item .inner-item a {
+  color: #fff;
+}
+.slider .item .inner-item a:hover {
+  color: #fff;
+}
 .index {
   width: 960px;
   margin: 20px auto;
@@ -1082,9 +1116,64 @@ a:hover {
 .index:after {
   clear: both;
 }
-.index .box {
-  width: 50%;
+.index .box-footer {
+  font-size: 11px;
+}
+.index .index-node {
+  zoom: 1;
+  padding: 10px 0px;
+}
+.index .index-node:before,
+.index .index-node:after {
+  content: "";
+  display: table;
+}
+.index .index-node:after {
+  clear: both;
+}
+.index .index-node img {
+  width: 80px;
   float: left;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.index .index-node .text {
+  padding-left: 95px;
+}
+.index .index-node .text h3 {
+  margin: 0px;
+}
+.index .index-node .text p {
+  margin: 0px;
+}
+.index .index-item {
+  zoom: 1;
+  padding: 10px;
+  border-top: 1px solid #f2f2f2;
+}
+.index .index-item:before,
+.index .index-item:after {
+  content: "";
+  display: table;
+}
+.index .index-item:after {
+  clear: both;
+}
+.index .index-item:first-child {
+  border: 0px;
+}
+.index .index-item img {
+  float: left;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.index .index-item .text {
+  padding-left: 170px;
+}
+.index .index-item .text h2 {
+  margin: 0px;
+  font-size: 16px;
+  font-weight: 100;
 }
 @media (max-width:767px) {
   .header {
@@ -1106,7 +1195,6 @@ a:hover {
   }
   .talkcover {
     min-width: 0px;
-    min-height: 300px;
   }
   .talkcover .title {
     font-size: 12px;

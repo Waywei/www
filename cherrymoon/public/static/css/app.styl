@@ -251,7 +251,7 @@ a
     background-size cover
     background-position 50% 50%
     min-width 960px
-    min-height 600px
+    min-height 500px
     position relative
     .title
       text-align center
@@ -454,14 +454,70 @@ a
   height 1px
   background #f2f2f2
   margin 10px 0px
- 
+.slider 
+  width 100%
+  margin 0 auto
+  .item
+    background #57ad69
+    min-height 500px
+    color #fff
+    text-shadow 1px 1px 1px #000
+    display table
+    .inner-item
+      display table-cell
+      vertical-align middle
+      background-size cover
+      background-position top center
+      h1
+        font-size 50px
+        text-align center
+      h2
+        font-size 30px
+        font-weight 100
+        text-align center
+      a
+        color #fff
+        &:hover
+          color #fff
+
+
+    
 .index
   width 960px
   margin 20px auto
   font-size 13px
   clearfix()
-  .box
-    width 50%
-    float left
+  .box-footer
+    font-size 11px
+  .index-node
+    clearfix()
+    padding 10px 0px
+    img
+      width 80px
+      float left
+      border-radius 3px
+    .text
+      padding-left 95px
+      h3
+        margin 0px
+      p
+        margin 0px
 
+  .index-item
+    clearfix()
+    padding 10px
+    border-top 1px solid #f2f2f2
+    &:first-child
+      border 0px
+    img
+      float left
+      border-radius 3px
+    .text
+      padding-left 170px
+      h2 
+        margin 0px
+        font-size 16px
+        font-weight 100
+
+//@import 'plugin'
 @import 'mobile'

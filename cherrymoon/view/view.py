@@ -20,10 +20,18 @@ notify = Counter()
 
 @app.route('/')
 def index():
-    topics = Topic.query.order_by(Topic.update_time.desc()).limit(10)
+    topics = Topic.query.order_by(Topic.update_time.desc()).limit(4)
+    for item in topics:
+        item.content = item.content[0:80]+'...'
     interviews = Interview.query\
-            .order_by(Interview.create_time.desc()).limit(10)
-    node = Node.query.order_by(Node.create_time).limit(30)
+            .order_by(Interview.create_time.desc()).limit(4)
+    for item in interviews:
+        item.content = item.content[0:80]+ '...'
+    nodelist = [1,2,3,4,5]
+    node = Node.query.filter(Node.id.in_(nodelist))
+    for n in node:
+        topics = Topic.query.filter_by(node_id = n.id)
+        n.topic_count = topics.count()
     return render('/index.jade',locals())
 
 @app.route('/node')
