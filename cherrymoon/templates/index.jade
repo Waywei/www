@@ -3,8 +3,7 @@ block title
   title {{config.BASETITLE}} - 首页
 block head
   if config.DEV
-    //-script(src='{{config.SURL}}static/js/swipe.js') 
-    script(src='http://www.dfs.com/scripts/swipe.js')
+    script(src='{{config.SURL}}static/js/swipe.js') 
   else
     script(src='http://cdn.staticfile.org/swipe/2.0/swipe.min.js')
   script.
@@ -38,7 +37,11 @@ block main
                     //-p {{t.content |striptags| truncate(220,Ture, end='...')}}
                     //-p
                       //-a(href="/interview/{{t.absurl}}") 继续阅读
-        #slider-index.box-footer(style="text-align:right")
+        .box-footer(style="text-align:right")
+          #swipe-index 
+            span 1
+            span 2
+            span 3
           a(href="/interview") 更多访谈
 
       .box

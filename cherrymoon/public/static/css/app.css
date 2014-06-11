@@ -1116,6 +1116,11 @@ a:hover {
 .index:after {
   clear: both;
 }
+.index #swipe-index {
+  display: inline-block;
+  margin-right: 30px;
+  display: none;
+}
 .index .box-footer {
   font-size: 11px;
 }
