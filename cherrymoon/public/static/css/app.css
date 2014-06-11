@@ -1119,6 +1119,34 @@ a:hover {
 .index .box-footer {
   font-size: 11px;
 }
+.index .swipe-item {
+  height: 360px;
+  width: 650px;
+  float: left;
+  -webkit-border-radius: 3px 3px 0px 0px;
+  border-radius: 3px 3px 0px 0px;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  background-position: top center;
+}
+.index .swipe-item .text {
+  background: rgba(0,0,0,0.4);
+  padding: 10px 15px;
+  float: left;
+  margin-top: 50px;
+}
+.index .swipe-item .text h2 {
+  margin: 0px;
+}
+.index .swipe-item .text .time {
+  margin: 0px;
+  font-size: 11px;
+  color: #999;
+}
+.index .swipe-item .text a {
+  color: #f2f2f2;
+}
 .index .index-node {
   zoom: 1;
   padding: 10px 0px;
@@ -1174,6 +1202,20 @@ a:hover {
   margin: 0px;
   font-size: 16px;
   font-weight: 100;
+}
+.swipe {
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+}
+.swipe .swipe-wrap {
+  overflow: hidden;
+  position: relative;
+}
+.swipe .swipe-wrap .swip-item {
+  float: left;
+  width: 100%;
+  position: relative;
 }
 @media (max-width:767px) {
   .header {

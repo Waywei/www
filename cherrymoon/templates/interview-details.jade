@@ -3,7 +3,7 @@ block title
   title {{config.BASETITLE}} - {{interview.title}}
 block head
 block main
-  .talkcover(style="background-image:url({{interview.cover}})")
+  .talkcover(style="background-image:url({{interview.cover|replace('l.jpeg','.jpeg')}})")
     .title
       h1 {{interview.title|e}}
       p

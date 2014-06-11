@@ -2,47 +2,46 @@ extends base/layout
 block title
   title {{config.BASETITLE}} - 首页
 block head
-  //-if config.DEV
-    //-script(src='{{config.SURL}}static/js/swipe.js')
-  //-else
-    //-script(src='http://cdn.staticfile.org/swipe/2.0/swipe.min.js')
-  //-script.
-    //-$(document).ready(function(){
-      //-window.mySwipe = new Swipe(document.getElementById('slider'), {
-        //-startSlide: 0,
-        //-speed: 400,
-        //-auto: 6000,
-        //-continuous: true,
-        //-disableScroll: false,
-        //-stopPropagation: false,
-        //-callback: function(index, elem) {},
-        //-transitionEnd: function(index, elem) {}
-      //-});
-    //-})
+  if config.DEV
+    script(src='{{config.SURL}}static/js/swipe.js')
+  else
+    script(src='http://cdn.staticfile.org/swipe/2.0/swipe.min.js')
+  script.
+    $(document).ready(function(){
+      window.mySwipe = new Swipe(document.getElementById('slider'), {
+        startSlide: 0,
+        speed: 400,
+        auto: 6000,
+        continuous: true,
+        disableScroll: false,
+        stopPropagation: false,
+        callback: function(index, elem) {},
+        transitionEnd: function(index, elem) {}
+      });
+    })
 block main
   //-.slider
-    #slider.swipe
-      .swipe-wrap
-        .item
-          .inner-item
               h1 {{config.BASETITLE}}
               h2 分享 发现 思考 交流
  
   .index
     #content
       .box
-        .box-title 访谈
+        //-.box-title 访谈
         .box-content
-          for t in interviews
-            .index-item
-              img(src='{{t.cover | replace("F.jpeg","Fb.jpeg")}}')
-              .text
-                h2 
-                  a(href="/interview/{{t.absurl}}") {{t.title | e}}
-                p {{t.content |striptags| truncate(220,Ture, end='...')}}
-                p
-                  a(href="/interview/{{t.absurl}}") 继续阅读
-        .box-footer(style="text-align:right")
+          #slider.swipe
+            .swipe-wrap
+              for t in interviews
+                .swipe-item(style='background-image:url({{t.cover}})')
+                  .text
+                    h2 
+                      a(href="/interview/{{t.absurl}}") {{t.title | e}}
+                    p.time
+                      {{t.create_time|time}}
+                    //-p {{t.content |striptags| truncate(220,Ture, end='...')}}
+                    //-p
+                      //-a(href="/interview/{{t.absurl}}") 继续阅读
+        #slider-index.box-footer(style="text-align:right")
           a(href="/interview") 更多访谈
 
       .box
