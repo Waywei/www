@@ -1240,7 +1240,8 @@ a:hover {
   }
   .talkcover {
     min-width: 0px;
-    min-height: 300px;
+    min-height: 320px;
+    width: 100%;
     display: table;
   }
   .talkcover .title {
