@@ -25,9 +25,6 @@ def index():
             .order_by(Interview.create_time.desc()).limit(4).all()
     nodelist = [1,2,3,4,5,6,7]
     node = Node.query.filter(Node.id.in_(nodelist))
-    for n in node:
-        node_topic = Topic.query.filter_by(node_id = n.id)
-        n.topic_count = node_topic.count()
     return render('/index.jade',locals())
 
 @app.route('/node')
