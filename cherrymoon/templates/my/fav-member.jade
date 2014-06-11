@@ -17,7 +17,7 @@ block main
             for user in favuser
               .item 
                 a(href="/member/{{user.id}}") 
-                  {{user.email|avatar}}
+                  {{user|avatar}}
                   br
                   {{user.username|e}}
 

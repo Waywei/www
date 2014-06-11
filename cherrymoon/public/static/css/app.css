@@ -1240,15 +1240,25 @@ a:hover {
   }
   .talkcover {
     min-width: 0px;
+    min-height: 300px;
+    display: table;
   }
   .talkcover .title {
+    display: table-cell;
+    vertical-align: bottom;
     font-size: 12px;
     position: static;
     width: 98%;
     margin: 0 auto;
   }
+  .talkcover .title h1 {
+    font-size: 16px;
+  }
   .index {
     width: 98%;
+  }
+  .index .swipe-item {
+    height: 300px;
   }
   .index .box {
     float: none;
