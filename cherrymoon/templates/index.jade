@@ -3,20 +3,17 @@ block title
   title {{config.BASETITLE}} - 首页
 block head
   if config.DEV
-    script(src='{{config.SURL}}static/js/swipe.js')
+    //-script(src='{{config.SURL}}static/js/swipe.js') 
+    script(src='http://www.dfs.com/scripts/swipe.js')
   else
     script(src='http://cdn.staticfile.org/swipe/2.0/swipe.min.js')
   script.
     $(document).ready(function(){
       window.mySwipe = new Swipe(document.getElementById('slider'), {
-        startSlide: 0,
-        speed: 400,
+        speed: 1500,
         auto: 6000,
         continuous: true,
-        disableScroll: false,
-        stopPropagation: false,
-        callback: function(index, elem) {},
-        transitionEnd: function(index, elem) {}
+        callback: function(index, elem) {}
       });
     })
 block main
@@ -28,7 +25,7 @@ block main
     #content
       .box
         //-.box-title 访谈
-        .box-content
+        .box-content(style="overflow:hidden;")
           #slider.swipe
             .swipe-wrap
               for t in interviews

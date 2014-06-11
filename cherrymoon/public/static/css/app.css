@@ -1121,8 +1121,6 @@ a:hover {
 }
 .index .swipe-item {
   height: 360px;
-  width: 650px;
-  float: left;
   -webkit-border-radius: 3px 3px 0px 0px;
   border-radius: 3px 3px 0px 0px;
   -webkit-background-size: cover;
@@ -1212,7 +1210,7 @@ a:hover {
   overflow: hidden;
   position: relative;
 }
-.swipe .swipe-wrap .swip-item {
+.swipe .swipe-wrap>div {
   float: left;
   width: 100%;
   position: relative;
@@ -1243,7 +1241,6 @@ a:hover {
     position: static;
     width: 98%;
     margin: 0 auto;
-    padding-top: 140px;
   }
   .index {
     width: 98%;
