@@ -16,6 +16,7 @@ import cherrymoon.view.talk
 import cherrymoon.view.admin
 
 import cherrymoon.view.sapi
+from cherrymoon.redis.limiter import post_check
 
 app.config.from_object('cherrymoon.config')
 
@@ -27,6 +28,14 @@ def load_current_user():
     g.user = get_current_user()
     g.starttimer = default_timer()
     #print g.user
+    #check if to much post
+    if request.method == 'POST' and g.user:
+        ip = str(request.remote_addr)
+        limit = post_check(ip)
+        if not limit:
+            return u"你对服务器提交数据的频率过快，系统已经记录了你用户名，这种行为将会导致账号被ban"
+
+    
 
 @app.after_request
 def request_time(response):
