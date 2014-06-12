@@ -49,8 +49,11 @@ block main
               .group
                 .text
                   上传头像
+                  br
                 .input-item
                   #filePicker 选择图片
+                  将被居中剪裁为100x100的尺寸
+                  br
                   .avatar-show
                     {{g.user|avatar}}
     #aside
