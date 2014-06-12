@@ -806,6 +806,22 @@ embed {
 }
 #interview .item {
   padding: 20px;
+  zoom: 1;
+}
+#interview .item:before,
+#interview .item:after {
+  content: "";
+  display: table;
+}
+#interview .item:after {
+  clear: both;
+}
+#interview .item .avatar {
+  width: 160px;
+  float: left;
+}
+#interview .item .detail {
+  margin-left: 200px;
 }
 #interview .item .detail h2 {
   margin: 10px;
@@ -1322,5 +1338,18 @@ embed {
   }
   .node-info .detail {
     margin-left: 90px;
+  }
+  #interview .item .detail {
+    margin-left: 100px;
+  }
+  #interview .item .detail h2 {
+    font-size: 15px;
+    margin-top: 0px;
+  }
+  #interview .item .avatar {
+    width: 100px;
+  }
+  #interview .item .avatar img {
+    width: 90px;
   }
 }

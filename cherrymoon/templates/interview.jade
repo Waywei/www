@@ -10,6 +10,8 @@ block main
   #interview
     for t in interviews.items
       .item
+        .avatar
+          img(src="{{t.cover|replace('l.jpeg','b.jpeg')}}")
         .detail
           h2  
             a(href="/interview/{{t.absurl}}") {{t.title | e}}
