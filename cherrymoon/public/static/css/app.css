@@ -698,6 +698,9 @@ a:hover {
 .imgly {
   max-width: 100%;
 }
+embed {
+  width: 100%;
+}
 .allnode {
   zoom: 1;
 }

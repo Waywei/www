@@ -52,7 +52,7 @@ block main
               .text(style="padding-left:0px")
                 h2
                   a(href="/topic/{{t.id}}") {{t.title | e}}
-                p {{t.content |striptags| truncate(120, True,end='...')}}
+                //-p {{t.content |striptags| truncate(120, True,end='...')}}
         .box-footer(style="text-align:right")
           a(href="/recent") 更多话题
     #aside
