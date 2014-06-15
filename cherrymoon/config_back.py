@@ -25,7 +25,7 @@ RECAPTCHA_PRIVATE_KEY = '6LegmvMSAAAAAAIZPRf8R7DRc5oufSmpYx9HDsQW'
 RECAPTCHA_OPTIONS = {'theme': 'white'}
 
 BASEURL = 'http://www.bearwave.com/'
-SURL = 'http://s.bearwave.com/'
+SURL = 'http://www.bearwave.com/'
 BASETITLE = 'bearwave'
 EMAIL = "syllor@bearwave.com"
 
