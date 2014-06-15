@@ -1,0 +1,23 @@
+# TEAM
+  id:syllor
+  email:syllor@bearwave.com
+  blog:syllor.bearwave.com
+
+  id:smdnrm
+  email:smdnrm@bearwave.com
+  blog:
+
+  id:twilight
+  email:tokkiwang@gmail.com
+  blog:
+
+
+#thanks the code
+  flask https://github.com/mitsuhiko/flask
+  june https://github.com/pythoncn/june
+  v2ex https://github.com/livid/v2ex
+
+#inspirit 
+  http://v2ex.com
+  http://www.china30s.com
+  http://zhihu.com

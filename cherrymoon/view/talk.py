@@ -3,7 +3,7 @@ from flask import flash,render_template, redirect,url_for
 from flask import g,request,flash,session
 from flask import abort
 from datetime import *
-from cherrymoon.ext.db import db,r,q
+from cherrymoon.ext.db import db,r
 from cherrymoon.ext.helper import k
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
 from cherrymoon.models import Page
