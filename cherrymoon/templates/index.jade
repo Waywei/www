@@ -42,7 +42,7 @@ block main
             span 1
             span 2
             span 3
-          a(href="/interview") 更多访谈
+          a.light-btn(href="/interview") 更多访谈
 
       .box
         .box-title 话题
@@ -54,7 +54,7 @@ block main
                   a(href="/topic/{{t.id}}") {{t.title | e}}
                 //-p {{t.content |striptags| truncate(120, True,end='...')}}
         .box-footer(style="text-align:right")
-          a(href="/recent") 更多话题
+          a.light-btn(href="/recent") 更多话题
     #aside
       include base/my
       .box

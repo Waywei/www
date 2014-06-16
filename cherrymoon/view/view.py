@@ -23,7 +23,7 @@ def index():
     topics = Topic.query.order_by(Topic.update_time.desc()).limit(10).all()
     interviews = Interview.query\
             .order_by(Interview.create_time.desc()).limit(4).all()
-    nodelist = [1,2,3,4,5,6,7]
+    nodelist = [1,2,3,4,5,8]
     node = Node.query.filter(Node.id.in_(nodelist))
     return render('/index.jade',locals())
 
