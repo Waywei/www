@@ -72,6 +72,12 @@ block main
                         {{loop.index}}楼
 
                   p.main-content {{c.content|content}}
+                  if g.admin
+                    p.admin-panel
+                      span ip: {{c.ip}} 
+                      a(href="/admin/commentview/edit/?id={{c.id}}") edit content
+                      a(href="/admin/userview/edit/?id={{c.user.id}}") edit user
+
 
       
       .box.comment-add

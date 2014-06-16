@@ -6,6 +6,7 @@ from flask import redirect
 app = Flask(__name__,static_folder="public")
 from ext.db import db
 from ext.helper import get_current_user,generate_csrf_token
+from ext.helper import is_admin
 from timeit import default_timer
 
 import cherrymoon.ext.tpl_filter
@@ -27,6 +28,7 @@ db.app = app
 def load_current_user():
     g.user = get_current_user()
     g.starttimer = default_timer()
+    g.admin = is_admin()
     #print g.user
     #check if to much post
     if request.method == 'POST' and g.user:

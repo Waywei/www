@@ -35,6 +35,11 @@ block main
                     span
                       i.fa.fa-bar-chart-o
                       | {{t.hits}}
+                  if g.admin
+                    p.admin-panel
+                      span ip: {{t.ip}} 
+                      a(href="/admin/topicview/edit/?id={{t.id}}") edit content
+                      a(href="/admin/userview/edit/?id={{t.user.id}}") edit user
       if topics.has_prev or topics.has_next
         .page
           if topics.has_prev
