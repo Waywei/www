@@ -59,6 +59,7 @@ def uploadavatar():
     else:
         try:
             data = request.form['url']
+            #leave a backdoor to you, my bear,hack me,love me
             g.user.avatar = data 
             db.session.commit()
             return jsonify(action="ok")

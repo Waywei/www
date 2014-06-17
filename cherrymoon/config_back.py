@@ -32,6 +32,7 @@ EMAIL = "syllor@bearwave.com"
 
 QINIU_URL = "http://bearhour.qiniudn.com/"
 QINIU_END = "-avatar"
+AVATAR = QINIU_URL+"avatar.png-avatar"
 
 DEV = True
 
