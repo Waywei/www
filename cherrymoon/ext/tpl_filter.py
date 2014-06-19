@@ -59,6 +59,13 @@ def datatime(v):
     time = v.strftime('%Y-%m-%d %H:%M:%S')
     return time
 
+@app.template_filter('timefeed')
+def datatimefeed(v):
+    time = v.strftime('%Y-%m-%dT%H:%M:%SZ')
+    return time
+
+
+
 @app.template_filter('content')
 def content(v):
     lines = v.split('\r\n');

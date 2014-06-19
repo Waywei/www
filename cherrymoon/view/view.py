@@ -2,6 +2,7 @@
 from flask import flash,render_template, redirect,url_for
 from flask import g,request,flash,session
 from flask import abort
+from flask import Response
 from datetime import *
 from cherrymoon.ext.db import db,r
 from cherrymoon.ext.helper import k
@@ -17,6 +18,48 @@ import re
 from cherrymoon.redis.counter import Counter
 
 notify = Counter()
+
+def r_set (key,val,sec):
+    pipe = r.pipeline()
+    pipe.set(key,val)
+    pipe.expire(key,sec)
+    pipe.execute()
+
+    
+
+@app.route('/interview/atom.xml')
+def interview_atom():
+    xml = r.get("feed:interview")
+    if not xml:
+        interviews = Interview.query\
+                .order_by(Interview.create_time.desc()).limit(10).all()
+        site = k()
+        site.title= u"bearwave 访谈"
+        site.subtitle = u"不同的生活经历,得到不同的生活经验,把他们留给年轻人是一件非常有意义的事情"
+        site.url = u"http://www.bearwave.com/interview"
+        site.atomurl = u"http://www.bearwave.com/interview/atom.xml"
+        site.topics = interviews
+        site.time = datetime.now()
+        xml =  render('/feed/Interview.xml',locals())
+        r_set("feed:interview",xml,60*60)
+    return Response(xml, mimetype='text/xml')
+
+@app.route('/atom.xml')
+def topic_atom():
+    xml = r.get("feed:topic")
+    if not xml:
+        topics = Topic.query\
+                .order_by(Topic.create_time.desc()).limit(10).all()
+        site = k()
+        site.title= u"bearwave 话题"
+        site.subtitle = u"最近的话题"
+        site.url = u"http://www.bearwave.com"
+        site.atomurl = u"http://www.bearwave.com/atom.xml"
+        site.topics = topics
+        site.time = datetime.now()
+        xml =  render('/feed/topic.xml',locals())
+        r_set("feed:topic",xml,60*60)
+    return Response(xml, mimetype='text/xml')
 
 @app.route('/')
 def index():
