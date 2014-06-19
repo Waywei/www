@@ -9,7 +9,7 @@
 {% for topic in site.topics %}
 <entry>
   <title>{{ topic.title|e }}</title>
-  <link rel="alternate" type="text/html" href="http://www.bearwave.com/{{ topic.absurl }}" />
+  <link rel="alternate" type="text/html" href="http://www.bearwave.com/interview/{{ topic.absurl }}" />
   <id>{{site.url}}/{{ topic.absurl }}</id>
   <published>{{ topic.create_time|timefeed}}</published>
   <updated>{{ topic.create_time|timefeed}}</updated>
