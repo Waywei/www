@@ -25,8 +25,6 @@ def r_set (key,val,sec):
     pipe.expire(key,sec)
     pipe.execute()
 
-    
-
 @app.route('/interview/atom.xml')
 def interview_atom():
     xml = r.get("feed:interview")
@@ -40,7 +38,7 @@ def interview_atom():
         site.atomurl = u"http://www.bearwave.com/interview/atom.xml"
         site.topics = interviews
         site.time = datetime.now()
-        xml =  render('/feed/Interview.xml',locals())
+        xml =  render('/feed/interview.xml',locals())
         r_set("feed:interview",xml,60*60)
     return Response(xml, mimetype='text/xml')
 
