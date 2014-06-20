@@ -161,7 +161,8 @@ def topic_detail(topic_id):
     node = Node.query.filter_by(id= topic.node_id).first()
     topic.hits += 1
     db.session.commit()
-    comments = Comment.query.filter_by(topic_id=topic_id)
+    comments = Comment.query.filter_by(topic_id=topic_id)\
+        .order_by(Comment.create_time)
     form = None
     isFav = None
     if g.user:
