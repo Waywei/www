@@ -8,21 +8,17 @@ block main
     .breadcrumb
       a(href="/") {{config.BASETITLE}}
       |  >  
-      a(href="/node") 节点
+      a(href="/treehole") 树洞
       |  >  
-      a(href="/node/{{node.slug}}") {{node.name}}
-      |  >  
-      添加新话题
+      把秘密告诉树洞
     #content
-      .box
-        .box-content
-          include node/nodeinfo
+      include treehole/info
       .box
         .box-title
-          | 添加新的话题
+          | 把秘密告诉树洞
         .box-content
           .regform
-            form.light-form(action="/node/{{node.slug}}/new",method="POST")
+            form.light-form(action="/treehole/new",method="POST")
               {{form.csrf_token }}
               div(style="margin-bottom:5px")
                 {{form.title(placeholder="输入标题")}}
@@ -40,5 +36,3 @@ block main
 
     #aside 
       include base/my
-      if node.aside
-        {{node.aside}} 

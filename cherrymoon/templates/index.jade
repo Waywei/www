@@ -1,6 +1,6 @@
 extends base/layout
 block title
-  title {{config.BASETITLE}} - 首页
+  title 首页 | {{config.BASETITLE}} 
 block head
   if config.DEV
     script(src='{{config.SURL}}static/js/swipe.js') 
@@ -43,6 +43,9 @@ block main
             span 2
             span 3
           a.light-btn(href="/interview") 更多访谈
+      a.treehole-index(href="/treehole",style="background-image:url(http://i.v2ex.co/TeDc0qJB.jpeg)")
+        .text
+          以前的人，心中如果有什么不可告人的秘密，他们会跑到山上，找一棵树，在树上挖一个洞，然后把秘密全说进去，再用泥巴把洞封上，那秘密就会永远留在那棵树里，没有人会知道
 
       .box
         .box-title 话题

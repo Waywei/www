@@ -98,6 +98,17 @@ class CommentForm(Form):
             )
 
 
+class TreeHoleForm(Form):
+    title = TextField('title',validators=[DataRequired()])
+    content  =  TextAreaField('content')
+ 
+class TreeCommentForm(Form):
+    content  = TextAreaField('comment-content',
+            validators=[Required(message=u'评论的内容不能为空')]
+            )
+
+
+
 class ForgetForm(Form):
     username = TextField(u'用户名',validators=[DataRequired()])
     email    = EmailField(u'邮箱账号',validators=[DataRequired()])

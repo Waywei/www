@@ -12,6 +12,7 @@ from timeit import default_timer
 import cherrymoon.ext.tpl_filter
 import cherrymoon.view.view
 import cherrymoon.view.user
+import cherrymoon.view.treehole
 #import cherrymoon.view.find
 import cherrymoon.view.talk
 import cherrymoon.view.admin

@@ -1,69 +1,53 @@
 {% from "_formhelper.html" import render_field %}
 extends base/layout
 block title
-  title {{topic.title}} | {{config.BASETITLE}} 
+  title {{th.title|e}} | {{config.BASETITLE}} 
 block head
 block main
   #main
     .breadcrumb
       a(href="/") {{config.BASETITLE}}
       |  >  
-      a(href="/node") 节点
-      |  >  
-      a(href="/node/{{node.slug}}") {{node.name}}
+      a(href="/treehole") 树洞
     #content
+      include treehole/info
       .box
         .box-content
           .topic-detail
             h1.title 
-              if node.node_type == 2
-                .fa.fa-lock
-              {{topic.title|e}}
+              {{th.title|e}}
             .info 
                 span
-                  a(href="/member/{{topic.user.id}}") 
                     i.fa.fa-user
-                    {{topic.user.username}} 
+                    |匿名
                 span
                   i.fa.fa-clock-o 
-                  | {{topic.create_time|timesince}}
+                  | {{th.create_time|timesince}}
                 span
                   i.fa.fa-comment-o
-                  | {{topic.comment_count}}
+                  | {{th.comment_count}}
                 span
                   i.fa.fa-bar-chart-o
-                  | {{topic.hits}}
+                  | {{th.hits}}
 
 
-            p.main-content {{topic.content|content}} 
+            p.main-content {{th.content|content}} 
             .div(style="margin:20px 0px;font-size:12px")
-                a.light-btn.btn1(href="http://service.weibo.com/share/share.php?title={{topic.title|e}}&url={{config.BASEURL}}topic/{{topic.id}}")
+                a.light-btn.btn1(href="http://service.weibo.com/share/share.php?title={{th.title|e}}&url={{config.BASEURL}}treehole/{{th.id}}")
                   .fa.fa-weibo
                   分享微博
-                &nbsp;
-                &nbsp;
-                if g.user
-                  if isFav
-                    a.favtopic.light-btn.btn2(href="/api/v1/fav/topic/{{topic.id}}") 
-                      i.fa.fa-star
-                      span 取消收藏
-                  else
-                    a.favtopic.light-btn.btn1(href="/api/v1/fav/topic/{{topic.id}}") 
-                      i.fa.fa-star
-                      span 收藏话题
 
-      if topic.comment_count >0
+      if th.comment_count >0
         h4
-            | 共有{{topic.comment_count}}条评论
+            | 共有{{th.comment_count}}条评论
         #comment.comment-list
             for c in comments
               .item(id="comment-{{loop.index}}")
                 .detail
                   .info
                       span
-                        a(href="/member/{{c.user.id}}") 
                           i.fa.fa-user
-                          {{c.user.username|e}}
+                          |匿名
                       span
                         i.fa.fa-bar-chart-o
                         {{c.create_time|timesince}}
@@ -73,13 +57,9 @@ block main
                       if g.admin
                           span ip: {{c.ip}} 
                           span
-                            a(href="/admin/commentview/edit/?id={{c.id}}") 
+                            a(href="/admin/treecommentview/edit/?id={{c.id}}") 
                               i.fa.fa-edit
                               |评论
-                          span
-                            a(href="/admin/userview/edit/?id={{c.user.id}}") 
-                              i.fa.fa-edit
-                              |用户
                   p.main-content {{c.content|content}}
       
       .box.comment-add
@@ -87,7 +67,7 @@ block main
           |添加新的讨论
         .box-content
           .regform
-            form.light-form(action="/topic/{{topic_id}}",method="POST")
+            form.light-form(action="/treehole/{{id}}",method="POST")
               if g.user
                 {{form.csrf_token }}
                 {{form.content(id="comment-content")}}
@@ -109,5 +89,3 @@ block main
                
     #aside
       include base/my
-      if node.aside
-        {{node.aside}} 

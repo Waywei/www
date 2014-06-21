@@ -1,6 +1,6 @@
 extends base/layout
 block title
-  title {{config.BASETITLE}} - {{interview.title}}
+  title {{interview.title}} | {{config.BASETITLE}} 
 block head
 block main
   .talkcover(style="background-image:url({{interview.cover|replace('l.jpeg','.jpeg')}})")

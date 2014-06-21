@@ -1,0 +1,46 @@
+extends base/layout
+block title
+  title 树洞 | {{config.BASETITLE}} 
+block head
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/treehole") 树洞
+      |  >  
+      span 最近的秘密
+    #content
+      include treehole/info
+      .box
+        .box-title
+          | 最近的秘密
+        .box-content
+          for t in topics.items
+            .topic-list
+              .item
+                .detail
+                  h2  
+                    a(href="/treehole/{{t.id}}") {{t.title | e}}
+                  .info 
+                      span
+                        i.fa.fa-user
+                        |匿名
+                      span
+                        i.fa.fa-clock-o 
+                        | {{t.create_time|timesince}}
+                      span
+                        i.fa.fa-comment-o
+                        | {{t.comment_count}}条评论
+                      span
+                        i.fa.fa-bar-chart-o
+                        | {{t.hits}}次浏览
+      if topics.has_prev or topics.has_next
+        .page
+          if topics.has_prev
+            a.left.light-btn.btn1(href='/treehole/page/{{topics.prev_num}}') 上一页
+          if topics.has_next
+            a.right.light-btn.btn1(href='/treehole/page/{{topics.next_num}}') 下一页
+
+    #aside
+      include base/my
