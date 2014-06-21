@@ -215,3 +215,28 @@ class Notification(db.Model):
     content     = Column(Text)
     create_time = db.Column(db.DateTime, default=datetime.utcnow)
 
+
+class TreeHole(db.Model):
+    id            = Column(Integer, primary_key = True)
+    title         = Column(String(140),nullable = False)
+    create_time   = Column(DateTime,default     = datetime.utcnow)
+    update_time   = Column(DateTime,default     = datetime.utcnow)
+    content       = Column(Text)
+    hits          = Column(Integer,default      = 0)
+    comment_count = Column(Integer,default      = 0)
+    ip            = Column(String(20),default="")
+    
+    def __unicode__(self):
+        return self.title
+
+class TreeComment(db.Model):
+    id          = Column(Integer, primary_key = True)
+    treehole_id    = Column(Integer,db.ForeignKey('treehole.id'),nullable = False)
+    treehole = db.relationship('TreeHole',lazy='joined')
+    content     = Column(Text,nullable        = False)
+    create_time = Column(DateTime,default     = datetime.utcnow)
+    ip          = Column(String(20),default="")
+
+    def __unicode__(self):
+        return self.content
+    
