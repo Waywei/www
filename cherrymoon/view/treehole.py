@@ -22,7 +22,7 @@ def recent_treehole(page=1):
             .paginate(page,per_page=30)
     except:
         topics = None
-    return render('/TreeHole/list.jade',locals())
+    return render('/treehole/list.jade',locals())
 
 
 
@@ -48,7 +48,6 @@ def treehole_detail(id):
     db.session.commit()
     comments = TreeComment.query.filter_by(treehole_id=id)\
         .order_by(TreeComment.create_time).all()
-    print "xxxxxx"
     for c in comments:
         print c
     form = None
