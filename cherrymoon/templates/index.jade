@@ -46,7 +46,24 @@ block main
       a.treehole-index(href="/treehole",style="background-image:url(http://i.v2ex.co/TeDc0qJB.jpeg)")
         .text
           以前的人，心中如果有什么不可告人的秘密，他们会跑到山上，找一棵树，在树上挖一个洞，然后把秘密全说进去，再用泥巴把洞封上，那秘密就会永远留在那棵树里，没有人会知道
+      .box
+        .box-title 节点
+        .box-content
+          .index-node
+            for n in node
+              .item
+                img(src="{{n.avatar}}")
+                .text
+                  h3
+                    a(href="node/{{n.slug}}") 
+                      if n.node_type == 2
+                        .fa.fa-lock
+                      {{n.name|e}}
+                  p
+                    {{n.description|e}}
 
+    #aside
+      include base/my
       .box
         .box-title 话题
         .box-content
@@ -58,25 +75,5 @@ block main
                 //-p {{t.content |striptags| truncate(120, True,end='...')}}
         .box-footer(style="text-align:right")
           a.light-btn(href="/recent") 更多话题
-    #aside
-      include base/my
-      .box
-        .box-title 节点
-        .box-content
-          for n in node
-            .index-node
-              img(src="{{n.avatar}}")
-              .text
-                h3
-                  a(href="node/{{n.slug}}") 
-                    if n.node_type == 2
-                      .fa.fa-lock
-                    {{n.name|e}}
-                p
-                  {{n.description|e}}
-
-
-
-   
 
              

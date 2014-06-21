@@ -1168,7 +1168,6 @@ embed {
 }
 .index .index-node {
   zoom: 1;
-  padding: 10px 0px;
 }
 .index .index-node:before,
 .index .index-node:after {
@@ -1178,18 +1177,27 @@ embed {
 .index .index-node:after {
   clear: both;
 }
+.index .index-node .item {
+  padding: 10px 0px;
+  width: 50%;
+  float: left;
+}
 .index .index-node img {
   width: 80px;
   float: left;
+  margin-left: 10px;
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 .index .index-node .text {
-  padding-left: 95px;
+  padding-left: 105px;
 }
 .index .index-node .text h3 {
   margin: 0px;
   margin: 0px;
+}
+.index .index-node .text p {
+  margin: 5px 0px;
 }
 .index .index-item {
   zoom: 1;
@@ -1388,5 +1396,14 @@ embed {
   }
   #interview .item .avatar img {
     width: 90px;
+  }
+  .index .index-node img {
+    width: 50px;
+  }
+  .index .index-node .text {
+    padding-left: 70px;
+  }
+  .index .index-node .text h3 {
+    font-size: 12px;
   }
 }
