@@ -231,8 +231,7 @@ class TreeHole(db.Model):
 
 class TreeComment(db.Model):
     id          = Column(Integer, primary_key = True)
-    treehole_id    = Column(Integer,db.ForeignKey('treehole.id'),nullable = False)
-    treehole = db.relationship('TreeHole',lazy='joined')
+    treehole_id    = Column(Integer,nullable = False)
     content     = Column(Text,nullable        = False)
     create_time = Column(DateTime,default     = datetime.utcnow)
     ip          = Column(String(20),default="")
