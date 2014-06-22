@@ -70,23 +70,24 @@ class SettingForm(Form):
     weixin = TextField(u'微信')
     other1 = TextField(u'qq')
 
-class FindingForm(Form):
-    is_active = SelectField(u'当前状态',choices=[
+class LookingForm(Form):
+    find_active = SelectField(u'当前状态',choices=[
         ('1',u'活跃'),
         ('0',u'不活跃')
         ],validators=[DataRequired()])
     age = IntegerField(u'年龄',validators=[DataRequired()])
     height = IntegerField(u'身高',validators=[DataRequired()])
     weight = IntegerField(u'体重',validators=[DataRequired()])
-    latitude = FloatField(u'坐标-x',validators=[DataRequired()])
-    longitude = FloatField(u'坐标-y',validators=[DataRequired()])
+    #latitude = FloatField(u'坐标-x',validators=[DataRequired()])
+    #longitude = FloatField(u'坐标-y',validators=[DataRequired()])
     like = SelectField(u'喜欢的类型',choices=[
         ('0',u'全部'),
         ('1',u"偏瘦"),
         ('2',u"偏胖"),
         ('3',u"很重"),
         ],validators=[DataRequired()])
-    findinfo = TextAreaField(u'交友简介',validators=[DataRequired()])
+    info = TextAreaField(u'交友简介',validators=[DataRequired()])
+    photo = TextField(u'照片',validators=[DataRequired()])
 
 class TopicForm(Form):
     title = TextField('title',validators=[DataRequired()])

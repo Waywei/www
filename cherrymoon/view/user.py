@@ -11,7 +11,7 @@ from cherrymoon.models import Page
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
-from cherrymoon.forms import FindingForm,UploadForm,ForgetForm,ResetPasswordForm
+from cherrymoon.forms import ForgetForm,ResetPasswordForm
 from cherrymoon.models import FavUser, FavTopic, FavNode
 from uuid import uuid4
 import requests
@@ -31,8 +31,8 @@ def register():
         imgurl = Gravatar(user.email, secure=False, size=100, rating='x')\
                 .thumb+'&d=404'
         req = requests.get(imgurl)
-        print "qqqqq"
-        print req.status_code
+        #print "qqqqq"
+        #print req.status_code
         if req.status_code == 200:
             user.avatar = "gravatar"
         db.session.add(user)

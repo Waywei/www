@@ -13,7 +13,6 @@ from cherrymoon.models import FavUser, FavNode, FavTopic
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
-from cherrymoon.forms import FindingForm,UploadForm
 import re
 from cherrymoon.redis.counter import Counter
 

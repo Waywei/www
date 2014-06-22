@@ -1,0 +1,17 @@
+extends base/layout
+block title
+  title 使用twitter的成员 | {{config.BASETITLE}} 
+block head
+block main
+  .find-members
+    include looking/subnav
+    .usergrid
+      for m in members
+        .item
+          a(href="/member/{{m.id}}")
+            {{m|avatar}}
+          br
+          {{m.username}}
+
+
+    

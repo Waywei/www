@@ -1,0 +1,138 @@
+{% from "_formhelper.html" import render_field %}
+extends base/layout
+block title 
+  title {{config.BASETITLE}} - 交友信息设置
+block head
+  script(src="http://cdn.staticfile.org/webuploader/0.1.1/webuploader.min.js")
+  style
+    .webuploader-container {
+      position: relative;
+    }
+    .webuploader-element-invisible {
+      position: absolute !important;
+      clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+        clip: rect(1px,1px,1px,1px);
+    }
+    .webuploader-pick {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      background: #00b7ee;
+      padding: 10px 15px;
+      color: #fff;
+      text-align: center;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .webuploader-pick-hover {
+      background: #00a2d4;
+    }
+
+    .webuploader-pick-disable {
+      opacity: 0.6;
+      pointer-events:none;
+}
+
+block main
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/looking-setting") 交友信息设置
+    #content
+      include base/flash.html
+      if look
+        if look.server_active 
+          .looking-status.success(style="margin-bottom:20px") 审核成功
+        else
+          .looking-status.warning(style="margin-bottom:20px") 资料已经更改,审核中,别着急
+      .box
+        .box-title
+          |上传个人真实照片
+        .box-content
+          .regform
+            .light-form
+              if look
+                .group
+                  .text
+                  .input-item
+                    img.qiniuimg(style="width:100px",src="http://bearwave.qiniudn.com/{{look.photo}}-looking")
+              else
+                .group
+                  .text
+                  .input-item
+                    img.qiniuimg(style="width:100px",src="http://bearwave.qiniudn.com/avatar.png-avatar")
+              .group
+                .text
+                  上传头像
+                  br
+                .input-item
+                  #filePicker 选择图片
+                  将被居中剪裁为500x500的尺寸
+                  .avatar-show
+                    //-{{g.user.looking.photo}}
+      .box
+        .box-title
+          | 设置详细信息
+        .box-content
+          .regform
+            form.light-form(action="/looking/setting",method="POST")
+              {{form.csrf_token }}
+              {{render_field(form.find_active)}}
+              {{render_field(form.age)}}
+              {{render_field(form.height)}}
+              {{render_field(form.weight)}}
+              {{render_field(form.like)}}
+              {{render_field(form.photo)}}
+              {{render_field(form.info)}}
+              .group
+                .text  
+                .input-item
+                  button.light-btn.btn1 提交
+
+    #aside
+      include base/my
+  script
+    (function( $ ){
+    var uploader = WebUploader.create({
+
+        // 选完文件后，是否自动上传。
+        auto: true,
+
+        // swf文件路径
+        swf: 'http://cdn.staticfile.org/webuploader/0.1.1/Uploader.swf',
+
+        // 文件接收服务端。
+        //server: 'http://webuploader.duapp.com/server/fileupload.php',
+        server: 'http://up.qiniu.com',
+
+        // 选择文件的按钮。可选。
+        // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+        pick: '#filePicker',
+
+        // 只允许选择图片文件。
+        accept: {
+            title: 'Images',
+            extensions: 'gif,jpg,jpeg,bmp,png',
+            mimeTypes: 'image/*'
+        },
+        // 用来扩展一个添加上qiniu的token，这个可以用后端语言来生成!!!!!
+        formData: {
+          'token':'{{qiniutoken}}'
+        }
+    });
+    uploader.on( 'uploadError', function( file ) {
+      alert("error")
+    });
+    uploader.on( 'uploadSuccess', function( file ) {
+    //-console.log("uploadSuccess")
+    });
+    // uploadaccept 这个事件才可以拿到qiniu返回的数据 这时已经上传成功!!!!
+    uploader.on( 'uploadAccept', function( file, response ) {
+      //-console.log(response.hash)
+        $("#photo").val(response.hash)
+        $(".qiniuimg").attr("src","http://bearwave.qiniudn.com/"+response.hash+"-avatar")
+    });
+    })( jQuery );
+
+

@@ -1,0 +1,35 @@
+extends base/layout
+block title
+  title 最近更新的成员 | {{config.BASETITLE}} 
+block head
+block main
+  .find-members
+    include looking/subnav
+    .members
+      for m in members.items
+        .member
+          a(href="/member/{{m.user.id}}")
+            img(src="http://bearwave.qiniudn.com/{{m.photo}}-looking")
+          .info
+            p 
+              b {{m.username}}
+              |  
+              span {{m.age}}岁-{{m.height}}cm-{{m.weight}}kg
+              |  
+              span 喜欢的类型:
+                if m.like == 0
+                  |全部
+                if m.like == 1
+                  |偏瘦
+                if m.like == 2
+                  |偏胖
+                if m.like == 3
+                  |很重
+              if g.admin
+                a(href="/admin/lookingview/edit/?id={{m.id}}") 审核
+
+
+            p {{m.findinfo}}
+
+
+    

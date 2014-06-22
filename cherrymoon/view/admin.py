@@ -51,7 +51,7 @@ admin.add_view(MyView(Comment,db.session))
 admin.add_view(MyView(User,db.session))
 admin.add_view(MyView(TreeHole,db.session))
 admin.add_view(MyView(TreeComment,db.session))
-#admin.add_view(MyView(Looking,db.session))
+admin.add_view(MyView(Looking,db.session))
 
 import os.path as op
 
