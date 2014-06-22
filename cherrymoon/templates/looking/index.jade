@@ -5,6 +5,8 @@ block head
 block main
   .find-members
     include looking/subnav
+    p 
+      a.light-btn.btn1(href="/looking/setting") 上传我的照片
     .members
       for m in members.items
         .member
@@ -27,9 +29,7 @@ block main
                   |很重
               if g.admin
                 a(href="/admin/lookingview/edit/?id={{m.id}}") 审核
-
-
-            p {{m.findinfo}}
+            p {{m.info}}
 
 
     
