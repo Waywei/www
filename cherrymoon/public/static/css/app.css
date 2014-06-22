@@ -418,6 +418,9 @@ select {
 .align-right {
   text-align: right;
 }
+br {
+  clear: both;
+}
 body {
   font-size: 14px;
   font-family: "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
