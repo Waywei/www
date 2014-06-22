@@ -4,6 +4,7 @@ from cherrymoon import app
 from cherrymoon.ext.db import db
 from cherrymoon.models import Interview,Topic,Node,Comment,User
 from cherrymoon.models import Page, Looking
+from cherrymoon.models import TreeHole, TreeComment
 from cherrymoon.ext.helper import is_admin
 from flask.ext.admin import Admin, BaseView, expose
 from flask.ext.admin.contrib.sqla import ModelView
@@ -48,7 +49,9 @@ admin.add_view(MyView(Topic,db.session))
 admin.add_view(MyView(Node,db.session))
 admin.add_view(MyView(Comment,db.session))
 admin.add_view(MyView(User,db.session))
-admin.add_view(MyView(Looking,db.session))
+admin.add_view(MyView(TreeHole,db.session))
+admin.add_view(MyView(TreeComment,db.session))
+#admin.add_view(MyView(Looking,db.session))
 
 import os.path as op
 
