@@ -48,13 +48,13 @@ def find_setting():
         if not look:
             look = Looking(**form.data)
             look.user = g.user
-            look.server_active = 0
+            look.server_active = False
             look.active_time = datetime.now()
             db.session.add(look)
             db.session.commit()
         else:
             form.populate_obj(look)
-            look.server_active = 0
+            look.server_active = False
             look.active_time = datetime.now()
             db.session.commit()
 
