@@ -48,8 +48,6 @@ def treehole_detail(id):
     db.session.commit()
     comments = TreeComment.query.filter_by(treehole_id=id)\
         .order_by(TreeComment.create_time).all()
-    for c in comments:
-        print c
     form = None
     if g.user:
         form = TreeCommentForm()
