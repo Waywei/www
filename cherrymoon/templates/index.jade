@@ -61,7 +61,8 @@ block main
                       {{n.name|e}}
                   p
                     {{n.description|e}}
-
+              if loop.index %2 == 0
+                br
     #aside
       include base/my
       .box
