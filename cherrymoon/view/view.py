@@ -18,12 +18,6 @@ from cherrymoon.redis.counter import Counter
 
 notify = Counter()
 
-def r_set (key,val,sec):
-    pipe = r.pipeline()
-    pipe.set(key,val)
-    pipe.expire(key,sec)
-    pipe.execute()
-
 @app.route('/interview/atom.xml')
 def interview_atom():
     xml = r.get("feed:interview")
@@ -38,7 +32,7 @@ def interview_atom():
         site.topics = interviews
         site.time = datetime.now()
         xml =  render('/feed/interview.xml',locals())
-        r_set("feed:interview",xml,60*60)
+        r.setex("feed:interview",60*60,xml)
     return Response(xml, mimetype='text/xml')
 
 @app.route('/atom.xml')
@@ -55,7 +49,7 @@ def topic_atom():
         site.topics = topics
         site.time = datetime.now()
         xml =  render('/feed/topic.xml',locals())
-        r_set("feed:topic",xml,60*60)
+        r.setex("feed:topic",60*60,xml)
     return Response(xml, mimetype='text/xml')
 
 @app.route('/')
