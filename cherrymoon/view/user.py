@@ -177,7 +177,7 @@ def memberinfo(id):
 @app.route('/member/<int:id>/topic')
 def membertopic(id):
     user = User.query.filter_by(id=id).first_or_404()
-    topics = Topic.query.filter_by(user_id=id).limit(20)
+    topics = Topic.query.filter_by(user_id=id).order_by(Topic.create_time.desc()).limit(20)
     if g.user:
         mid = str(g.user.id)
         tid = str(id)
@@ -190,7 +190,8 @@ def membertopic(id):
 @app.route('/member/<int:id>/reply')
 def memberreply(id):
     user = User.query.filter_by(id=id).first_or_404()
-    comments = Comment.query.filter_by(user_id=user.id).limit(20)
+    comments = Comment.query.filter_by(user_id=user.id)\
+            .order_by(Comment.create_time.desc()).limit(20)
     if g.user:
         mid = str(g.user.id)
         tid = str(id)
