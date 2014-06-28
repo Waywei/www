@@ -10,6 +10,7 @@ from cherrymoon.ext.helper import csrf_check
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
 from cherrymoon.models import Page,Notification
 from cherrymoon.models import FavUser, FavNode, FavTopic
+from cherrymoon.models import TreeHole
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
@@ -54,7 +55,9 @@ def topic_atom():
 
 @app.route('/')
 def index():
-    topics = Topic.query.order_by(Topic.update_time.desc()).limit(10).all()
+    topics = Topic.query.order_by(Topic.update_time.desc()).limit(6).all()
+    treehole = TreeHole.query.order_by(TreeHole.create_time.desc())\
+            .limit(6).all()
     interviews = Interview.query\
             .order_by(Interview.create_time.desc()).limit(4).all()
     nodelist = [1,2,3,4,5,8]

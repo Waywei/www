@@ -65,7 +65,20 @@ block main
                 br
     #aside
       include base/my
+
       .box
+        .box-title 树洞里的秘密
+        .box-content
+          for t in treehole
+            .index-item
+              .text(style="padding-left:0px")
+                h2
+                  a(href="/topic/{{t.id}}") {{t.title | e}}
+                //-p {{t.content |striptags| truncate(120, True,end='...')}}
+        .box-footer(style="text-align:right")
+          a.light-btn(href="/recent") 更多秘密
+
+       .box
         .box-title 话题
         .box-content
           for t in topics
@@ -77,4 +90,4 @@ block main
         .box-footer(style="text-align:right")
           a.light-btn(href="/recent") 更多话题
 
-             
+  
