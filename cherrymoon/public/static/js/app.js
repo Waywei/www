@@ -93,3 +93,21 @@ $(document).ready(function(){
     $(this).closest('form').trigger('submit');  
   })
 })
+
+$(document).ready(function(){
+  var comment = $("#comment-content")
+  $(".comment-list .item").each(function(i,item){
+    var name = $(item).find(".detail .info span").eq(0).text()
+    name = name.replace("\n","");
+    var reply = $("<i>").addClass("fa").addClass("fa-reply");
+    reply.css("cursor","pointer")
+    reply.click(function(){
+      var text = comment.val()
+      comment.val("@"+name+"\n"+text)
+    })
+    $(item).find(".info").append(reply)
+  
+  })
+
+
+})
