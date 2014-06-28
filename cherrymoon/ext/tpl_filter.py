@@ -113,7 +113,6 @@ def tudou(value):
 
 def mentions(value):
     ms = re.findall(ur'(@[a-zA-Z0-9\_\u4e00-\u9fa5]+\.?)\s?', value)
-    print ms
     if (len(ms) > 0):
         for m in ms:
             m_id = re.findall(ur'@([a-zA-Z0-9\_\u4e00-\u9fa5]+\.?)', m)
