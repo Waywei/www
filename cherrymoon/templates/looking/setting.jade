@@ -41,6 +41,7 @@ block main
       a(href="/looking-setting") 交友信息设置
     #content
       include base/flash.html
+      include submenu
       if look
         if look.server_active 
           .looking-status.success(style="margin-bottom:20px") 审核成功
@@ -83,7 +84,8 @@ block main
               {{render_field(form.height)}}
               {{render_field(form.weight)}}
               {{render_field(form.like)}}
-              {{render_field(form.photo)}}
+              .div(style="display:none")
+                {{render_field(form.photo)}}
               {{render_field(form.info)}}
               .group
                 .text  

@@ -1,0 +1,14 @@
+.subnav
+
+  if '/setting' in request.path and 'looking' not in request.path
+    a.btn.active(href="/setting") 个人设置
+  else
+    a.btn(href="/setting") 个人设置
+  if '/avatar' in request.path
+    a.btn.active(href="/avatar") 头像设置
+  else
+    a.btn(href="/avatar") 头像设置
+  if '/looking/setting' in request.path
+    a.btn.active(href="/looking/setting") 交友设置
+  else
+    a.btn(href="/looking/setting") 交友设置

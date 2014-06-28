@@ -15,19 +15,12 @@ if g.user
         a(href="/my/favnode") 
           i.fa.fa-leaf
           收藏的节点
-      .line
-      p(style="font-size:11px")
-        if g.user.notify and g.user.notify != "0" 
-          a.light-btn.btn1(href="/notification") 您有{{g.user.notify}}条新的通知
-        else
-          a(href="/notification") 没有新的通知
-      .line
-      p(style="font-size:11px")
-        a.light-btn.btn1(href="/setting") 个人设置
-        | 
-        a.light-btn.btn1(href="/avatar") 头像设置
-        //-| 
-        //-a.light-btn.btn1(href="/find/setting") 交友设置
+    .box-footer(style="font-size:12px")
+      a.light-btn(href="/node/mix/new") 发布话题
+      | &nbsp;&nbsp;
+      a.light-btn(href="/treehole/new") 有话告诉树洞
+
+
 else 
   .box.my
     .box-title
@@ -39,6 +32,4 @@ else
         |  
         a.light-btn.btn1(href="/register") 注册
 
-.box.my
-  .box-content
-    a(href="/node/mix/new") 我要发布话题
+

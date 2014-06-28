@@ -15,7 +15,12 @@
       .userpanel
         if g.user
             a.avatar(href="/member/{{g.user.id}}")
-              {{g.user | savatar}}
+              {{g.user | avatar}}
+
+            if g.user.notify and g.user.notify != "0" 
+              a(style="color:#57ad69",href="/notification") {{g.user.notify}}条新通知
+            else
+              a(href="/notification") 通知
             a(href="/setting") 设置
             a(href="/logout") 退出
         else
