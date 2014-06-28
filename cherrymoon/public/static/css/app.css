@@ -332,6 +332,15 @@ select {
   float: left;
   color: #f00;
 }
+.light-form .group .tips {
+  padding-left: 190px;
+  color: #999;
+}
+@media (max-width:767px) {
+  .light-form .group .tips {
+    padding-left: 0px;
+  }
+}
 .light-btn {
   /* Structure */
   display: inline-block;
@@ -689,6 +698,9 @@ a:hover {
 }
 .page .right {
   float: right;
+}
+a.light-btn {
+  color: #333;
 }
 .btn1 {
   background: #57ad69;

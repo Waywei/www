@@ -112,10 +112,11 @@ def tudou(value):
         return value
 
 def mentions(value):
-    ms = re.findall('(@[a-zA-Z0-9\_]+\.?)\s?', value)
+    ms = re.findall(ur'(@[a-zA-Z0-9\_\u4e00-\u9fa5]+\.?)\s?', value)
+    print ms
     if (len(ms) > 0):
         for m in ms:
-            m_id = re.findall('@([a-zA-Z0-9\_]+\.?)', m)
+            m_id = re.findall(ur'@([a-zA-Z0-9\_\u4e00-\u9fa5]+\.?)', m)
             if (len(m_id) > 0):
                 if (m_id[0].endswith('.') != True):
                     value = value.replace('@' + m_id[0], '@<a href="/m/' + m_id[0] + '">' + m_id[0] + '</a>')

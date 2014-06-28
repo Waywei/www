@@ -18,7 +18,13 @@ block main
             form.light-form(action="/register",method="POST")
               {{form.csrf_token }}
               {{render_field(form.email)}}
+              .group
+                .tips
+                  |使用真实邮箱注册，忘记密码时候可以通过邮箱找回账号
               {{render_field(form.username)}}
+              .group
+                .tips
+                  |用户名可以包含 字母，数字，下划线，中文，长度为2到8个字符
               {{render_field(form.password)}}
               .group
                 .text  
