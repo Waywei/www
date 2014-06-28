@@ -969,6 +969,9 @@ embed {
 .comment-list .detail .info span {
   margin-right: 15px;
 }
+.comment-list .detail .info .replyname {
+  cursor: pointer;
+}
 .comment-add {
   margin-top: 20px;
 }

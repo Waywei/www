@@ -99,11 +99,11 @@ $(document).ready(function(){
   $(".comment-list .item").each(function(i,item){
     var name = $(item).find(".detail .info span").eq(0).text()
     name = name.replace("\n","");
-    var reply = $("<i>").addClass("fa").addClass("fa-reply");
-    reply.css("cursor","pointer")
+    var reply = $(item).find(".replyname")
     reply.click(function(){
       var text = comment.val()
       comment.val("@"+name+"\n"+text)
+      $(window).scrollTop($("#comment-content").offset().top)
     })
     $(item).find(".info").append(reply)
   

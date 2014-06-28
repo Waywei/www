@@ -70,6 +70,11 @@ block main
                       span
                         i.fa.fa-th-list
                         {{loop.index}}楼
+                      if g.user
+                        span.replyname
+                          i.fa.fa-reply
+                          |回复他
+
                       if g.admin
                           span ip: {{c.ip}} 
                           span
