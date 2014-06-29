@@ -98,7 +98,7 @@ class LookingForm(Form):
     question1 = TextAreaField(u'最喜欢做的三件事',validators=[DataRequired()])
     question2 = TextAreaField(u'最喜欢的三个音乐人，乐队',validators=[DataRequired()])
     question3 = TextAreaField(u'受到影响最多的三部电影',validators=[DataRequired()])
-    question4 = TextAreaField(u'受到影响最多的三本书',validators=[DataRequired()])
+    question4 = TextAreaField(u'受到影响最多的三个人',validators=[DataRequired()])
     question5 = TextAreaField(u'未来必将发生的三件事',validators=[DataRequired()])
     question6 = TextAreaField(u'未来绝不会发生的三件事',validators=[DataRequired()])
 class TopicForm(Form):
