@@ -70,7 +70,7 @@ block main
                 a(href="{{user.facebook|e}}",target="_blank") {{user.facebook|e}}
       if looking
         .box#looking-info
-          .box-title 真是照片信息
+          .box-title 照片信息
           .box-content
             .looking-info
 
@@ -84,13 +84,17 @@ block main
                 i.fa.fa-heart
                 span 喜欢的类型:
                   if looking.like == 0
-                    |  全部
+                    |  我不是很在意
                   if looking.like == 1
                     |  偏瘦
                   if looking.like == 2
+                    |  正常
+                  if looking.like == 3
                     |  偏胖
                   if looking.like == 3
-                    |  很重
+                    |  很胖
+                  if looking.like == 3
+                    |  壮
               h3 简单介绍
               p  {{looking.info}}
               .line
