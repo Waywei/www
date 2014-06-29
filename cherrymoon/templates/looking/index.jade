@@ -34,13 +34,17 @@ block main
                     i.fa.fa-heart
                     span 喜欢的类型:
                       if m.like == 0
-                        |  全部
+                        |  我不是很在意
                       if m.like == 1
                         |  偏瘦
                       if m.like == 2
-                        |  偏胖
+                        |  正常
                       if m.like == 3
-                        |  很重
+                        |  偏胖
+                      if m.like == 4
+                        |  很胖
+                      if m.like == 5
+                        |  壮
 
                   p 个人介绍:  {{m.info}}
 
