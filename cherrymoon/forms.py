@@ -70,25 +70,37 @@ class SettingForm(Form):
     weixin = TextField(u'微信')
     other1 = TextField(u'qq')
 
+age = [(str(i),str(i)) for i in xrange(12,65)]
+weight = [(str(i),str(i)+u"公斤(kg)") for i in xrange(40,150)]
+height = [(str(i),str(i)+u"厘米(cm)") for i in xrange(150,230)]
+ 
 class LookingForm(Form):
     find_active = SelectField(u'当前状态',choices=[
         ('1',u'活跃'),
         ('0',u'不活跃')
         ],validators=[DataRequired()])
-    age = IntegerField(u'年龄',validators=[DataRequired()])
-    height = IntegerField(u'身高',validators=[DataRequired()])
-    weight = IntegerField(u'体重',validators=[DataRequired()])
+    age = SelectField(u'年龄',choices= age,validators=[DataRequired()])
+    height = SelectField(u'身高',choices=height,validators=[DataRequired()])
+    weight = SelectField(u'体重',choices=weight,validators=[DataRequired()])
     #latitude = FloatField(u'坐标-x',validators=[DataRequired()])
     #longitude = FloatField(u'坐标-y',validators=[DataRequired()])
-    like = SelectField(u'喜欢的类型',choices=[
-        ('0',u'全部'),
+    like = SelectField(u'喜欢的体型',choices=[
+        ('0',u'我不是很在意'),
         ('1',u"偏瘦"),
-        ('2',u"偏胖"),
-        ('3',u"很重"),
+        ('2',u"正常"),
+        ('3',u"偏胖"),
+        ('4',u"很胖"),
+        ('5',u"壮"),
         ],validators=[DataRequired()])
     info = TextAreaField(u'交友简介',validators=[DataRequired()])
     photo = TextField(u'照片',validators=[DataRequired()])
 
+    question1 = TextAreaField(u'最喜欢做的三件事',validators=[DataRequired()])
+    question2 = TextAreaField(u'最喜欢的三个音乐人，乐队',validators=[DataRequired()])
+    question3 = TextAreaField(u'受到影响最多的三部电影',validators=[DataRequired()])
+    question4 = TextAreaField(u'受到影响最多的三本书',validators=[DataRequired()])
+    question5 = TextAreaField(u'未来必将发生的三件事',validators=[DataRequired()])
+    question6 = TextAreaField(u'未来绝不会发生的三件事',validators=[DataRequired()])
 class TopicForm(Form):
     title = TextField('title',validators=[DataRequired()])
     content  =  TextAreaField('content')

@@ -68,6 +68,46 @@ block main
               p.link
                 .fa.fa-facebook
                 a(href="{{user.facebook|e}}",target="_blank") {{user.facebook|e}}
+      if looking
+        .box#looking-info
+          .box-title 真是照片信息
+          .box-content
+            .looking-info
+
+              p
+                img(src="http://bearwave.qiniudn.com/{{looking.photo}}-looking")
+              
+              p
+                i.fa.fa-database
+                span {{looking.age}}岁-{{looking.height}}cm-{{looking.weight}}kg
+              p
+                i.fa.fa-heart
+                span 喜欢的类型:
+                  if looking.like == 0
+                    |  全部
+                  if looking.like == 1
+                    |  偏瘦
+                  if looking.like == 2
+                    |  偏胖
+                  if looking.like == 3
+                    |  很重
+              h3 简单介绍
+              p  {{looking.info}}
+              .line
+              h4 最喜欢做的三件事
+              p {{looking.question1}}
+              h4 最喜欢的三个音乐人，乐队
+              p {{looking.question2}}
+              h4 受到影响最多的三部电影
+              p {{looking.question3}}
+              h4 受到影响最多的三本书
+              p {{looking.question4}}
+              h4 未来必将发生的三件事
+              p {{looking.question5}}
+              h4 未来绝不会发生的三件事
+              p {{looking.question6}}
+
+
 
     #aside
       include base/my

@@ -86,22 +86,30 @@ class Looking(db.Model):
     id          = Column(Integer, primary_key = True)
     user_id     = Column(Integer,db.ForeignKey('user.id'),index = True,nullable = False)
     user        = db.relationship('User',lazy='joined',uselist=False)
-    age         = Column(Integer,default=20,index = True)
-    weight      = Column(Integer,default=80,index = True)
-    height      = Column(Integer,default=175,index = True)
+    age         = Column(Integer,default=30)
+    weight      = Column(Integer,default=75)
+    height      = Column(Integer,default=175)
 
     latitude    = Column(Float,default=0,index = True)
     longitude   = Column(Float,default=0,index = True)
 
     like        = Column(Integer,default=0)
-    photo       = Column(String(120),default="")
+    photo       = Column(String(120),default='')
     
+    question1   = Column(String(200),default='')
+    question2   = Column(String(200),default='')
+    question3   = Column(String(200),default='')
+    question4   = Column(String(200),default='')
+    question5   = Column(String(200),default='')
+    question6   = Column(String(200),default='')
+
     info        = Column(String(500),default='')
 
-    find_active   = Column(Boolean,default='0')
-    server_active = Column(Boolean,default='0')
+    find_active   = Column(Boolean,default=0)
+    server_active = Column(Boolean,default=0)
     active_time   = Column(DateTime,default=datetime.utcnow)
 
+    passinfo      = Column(String(500),default='')
 
 class Node(db.Model):
     '''

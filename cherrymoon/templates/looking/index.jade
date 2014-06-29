@@ -1,35 +1,60 @@
 extends base/layout
 block title
-  title 最近更新的成员 | {{config.BASETITLE}} 
+  title 最近更新资料的成员 | {{config.BASETITLE}} 
 block head
 block main
-  .find-members
-    include looking/subnav
-    p 
-      a.light-btn.btn1(href="/looking/setting") 上传我的照片
-    .members
-      for m in members.items
-        .member
-          a(href="/member/{{m.user.id}}")
-            img(src="http://bearwave.qiniudn.com/{{m.photo}}-looking")
-          .info
-            p 
-              b {{m.username}}
-              |  
-              span {{m.age}}岁-{{m.height}}cm-{{m.weight}}kg
-              |  
-              span 喜欢的类型:
-                if m.like == 0
-                  |全部
-                if m.like == 1
-                  |偏瘦
-                if m.like == 2
-                  |偏胖
-                if m.like == 3
-                  |很重
-              if g.admin
-                a(href="/admin/lookingview/edit/?id={{m.id}}") 审核
-            p {{m.info}}
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/looking") 寻
+    #content
+      include looking/subnav
+      .box
+        .box-title
+          | 最近的更新资料的成员
+        .box-content
+          .looking-list
+            for m in looking.items
+              .item
+                .avatar
+                  a(href="/member/{{m.user.id}}#looking-info")
+                    img(src="http://bearwave.qiniudn.com/{{m.photo}}-avatar")
+                .info
+                  p 
+                    a(href="/member/{{m.user.id}}#looking-info")
+                      b {{m.user.username}}
+                    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    if g.admin
+                      a(href="/admin/lookingview/edit/?id={{m.id}}") 操作
+                  p
+                    i.fa.fa-database
+                    span {{m.age}}岁-{{m.height}}cm-{{m.weight}}kg
+                    |&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    i.fa.fa-heart
+                    span 喜欢的类型:
+                      if m.like == 0
+                        |  全部
+                      if m.like == 1
+                        |  偏瘦
+                      if m.like == 2
+                        |  偏胖
+                      if m.like == 3
+                        |  很重
 
+                  p 个人介绍:  {{m.info}}
 
-    
+      if looking.has_prev or looking.has_next
+        .page
+          if looking.has_prev
+            a.left.light-btn.btn1(href='/looking/page/{{topics.prev_num}}') 上一页
+          if looking.has_next
+            a.right.light-btn.btn1(href='/looking/page/{{topics.next_num}}') 下一页
+ 
+    #aside
+      include base/my.jade
+      p
+        a.light-btn.btn1(href="/looking/setting") 
+          i.fa.fa-upload
+          |上传我的照片
+   

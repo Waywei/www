@@ -20,16 +20,10 @@ import uuid
 
 @app.route('/looking')
 @app.route('/looking/page/<int:page>',methods=['GET','POST'])
-@require_login
 def find_all(page=1):
-    if not g.admin:
-        members = Looking.query.filter_by(server_active="1",find_active="1")\
-            .order_by(Looking.active_time.desc())\
-            .paginate(page,per_page=20)
-    else:
-        members = Looking.query.filter_by(find_active="1")\
-            .order_by(Looking.active_time.desc())\
-            .paginate(page,per_page=20)
+    looking = Looking.query.filter_by(server_active="1",find_active="1")\
+        .order_by(Looking.active_time.desc())\
+        .paginate(page,per_page=20)
 
     return render('/looking/index.jade',locals())
 
@@ -48,28 +42,34 @@ def find_setting():
         if not look:
             look = Looking(**form.data)
             look.user = g.user
-            look.server_active = False
+            look.server_active = True
             look.active_time = datetime.now()
             db.session.add(look)
             db.session.commit()
+            return redirect("/member/"+str(user.id)+"#looking-info")
         else:
             form.populate_obj(look)
-            look.server_active = False
+            look.server_active = True
             look.active_time = datetime.now()
             db.session.commit()
+            return redirect("/member/"+str(user.id)+"#looking-info")
 
     return render('/looking/setting.jade',locals())
 
 
 @app.route('/looking/instagram')
-@require_login
-def find_instagram():
-    members = User.query.filter(User.instagram!="").all()
+@app.route('/looking/instagram/page/<int:page>',methods=['GET','POST'])
+def find_instagram(page=1):
+    members = User.query.filter(User.instagram!="")\
+        .order_by(User.create_time.desc())\
+        .paginate(page,per_page=20)
     return render('/looking/instagram.jade',locals())
 
 
 @app.route('/looking/twitter')
-@require_login
-def find_twitter():
-    members = User.query.filter(User.twitter!="").all()
+@app.route('/looking/twitter/page/<int:page>',methods=['GET','POST'])
+def find_twitter(page=1):
+    members = User.query.filter(User.twitter!="")\
+        .order_by(User.create_time.desc())\
+        .paginate(page,per_page=20)
     return render('/looking/twitter.jade',locals())

@@ -7,7 +7,7 @@ from cherrymoon.ext.db import db,r
 from cherrymoon.ext.helper import k, send_email
 from cherrymoon.ext.helper import csrf_check
 from cherrymoon.models import User, Node, Topic, Comment, Interview 
-from cherrymoon.models import Page
+from cherrymoon.models import Page, Looking
 from cherrymoon import app
 from cherrymoon.ext.helper import render ,require_login
 from cherrymoon.forms import SignupForm,SigninForm,SettingForm,TopicForm,CommentForm
@@ -166,6 +166,7 @@ def memberslug(username):
 @app.route('/member/<int:id>')
 def memberinfo(id):
     user = User.query.filter_by(id=id).first_or_404()
+    looking = Looking.query.filter_by(user=user).first()
     if g.user:
         mid = str(g.user.id)
         tid = str(id)

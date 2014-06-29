@@ -1,4 +1,14 @@
 .subnav
-  a.btn(href="/looking") 刚更新照片成员
-  a.btn(href="/looking/instagram") 使用instagram的成员
-  a.btn(href="/looking/twitter") 用twitter的成员
+  if "/instagram" not in request.path and "/twitter" not in request.path
+    a.btn.active(href="/looking") 照片
+  else
+    a.btn(href="/looking") 照片
+  if '/instagram' in request.path
+    a.btn.active(href="/looking/instagram") instagram用户
+  else
+    a.btn(href="/looking/instagram") instagram用户
+
+  if '/twitter' in request.path
+    a.btn.active(href="/looking/twitter") twitter用户
+  else
+    a.btn(href="/looking/twitter") twitter用户

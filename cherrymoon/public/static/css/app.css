@@ -325,7 +325,7 @@ select {
 }
 .light-form .group .input-item {
   float: left;
-  width: 250px;
+  width: 350px;
 }
 .light-form .group .errors {
   margin-top: 5px;
@@ -872,6 +872,52 @@ embed {
   background: #f8f9f2;
   padding: 10px;
 }
+.looking-list .item {
+  border-bottom: 1px solid #e5e3e3;
+  padding: 15px 10px;
+  zoom: 1;
+}
+.looking-list .item:before,
+.looking-list .item:after {
+  content: "";
+  display: table;
+}
+.looking-list .item:after {
+  clear: both;
+}
+.looking-list .item .avatar {
+  width: 120px;
+  float: left;
+}
+.looking-list .item .avatar img {
+  width: 100px;
+}
+.looking-list .item .info {
+  padding-left: 120px;
+  font-size: 12px;
+}
+.looking-list .item .info p {
+  margin: 0px 0px 5px 0px;
+}
+.looking-info {
+  font-size: 12px;
+  padding: 10px;
+}
+.looking-info h4 {
+  margin: 5px 0px;
+  color: #999;
+  margin-top: 20px;
+  font-size: 12px;
+}
+.looking-info p {
+  margin: 5px 0px;
+  font-size: 14px;
+}
+.looking-info img {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  max-width: 100%;
+}
 .topic-detail {
   padding: 10px;
 }
@@ -1018,16 +1064,15 @@ embed {
   margin: 5px 0px;
 }
 .subnav {
+  font-size: 12px;
   background: #fff;
   margin-bottom: 20px;
-  -webkit-box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
-  box-shadow: 0px 2px 2px rgba(0,0,0,0.1);
   -webkit-border-radius: 3px;
   border-radius: 3px;
 }
 .subnav .btn {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 6px 20px;
 }
 .subnav .active {
   color: #57ad69;

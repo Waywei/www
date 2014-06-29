@@ -3,15 +3,37 @@ block title
   title 使用twitter的成员 | {{config.BASETITLE}} 
 block head
 block main
-  .find-members
-    include looking/subnav
-    .usergrid
-      for m in members
-        .item
-          a(href="/member/{{m.id}}")
-            {{m|avatar}}
-          br
-          {{m.username}}
+  #main
+    .breadcrumb
+      a(href="/") {{config.BASETITLE}}
+      |  >  
+      a(href="/looking/twitter") 使用twitter的成员
+    #content
+      include looking/subnav
+      .box
+        .box-title 使用twitter的成员
+        .box-content
+          .looking-list
+            for m in members.items
+              .item
+                .avatar
+                  a(href="/member/{{m.id}}")
+                    {{m|avatar}}
+                .info
+                  p 
+                    a(href="/member/{{m.id}}/looking")
+                      b {{m.username}}
+                  p
+                    a(href="{{m.twitter|e}}") 
+                      i.fa.fa-twitter
+                      |{{m.twitter|e|replace("http://twitter.com/","")}}
 
-
+      if members.has_prev or members.has_next
+        .page
+          if members.has_prev
+            a.left.light-btn.btn1(href='/looking/twitter/page/{{topics.prev_num}}') 上一页
+          if members.has_next
+            a.right.light-btn.btn1(href='/looking/twitter/page/{{topics.next_num}}') 上一页
+    #aside
+      include base/my.jade
     

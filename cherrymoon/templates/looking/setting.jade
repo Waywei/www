@@ -44,14 +44,18 @@ block main
       include submenu
       if look
         if look.server_active 
-          .looking-status.success(style="margin-bottom:20px") 审核成功
+          .looking-status.success(style="padding:10px;margin-bottom:20px") 上传成功
         else
-          .looking-status.warning(style="margin-bottom:20px") 资料已经更改,审核中,别着急
+          .looking-status.warning(style="margin-bottom:20px") 请认真填写资料，上传真实清晰的个人照片
       .box
         .box-title
-          |上传个人真实照片
+          | 设置详细信息
         .box-content
           .regform
+
+            h3
+              i.fa.fa-exclamation-circle 
+              |请上传图片尺寸大于500x500像素的真实本人照片,并认真填写下面的内容
             .light-form
               if look
                 .group
@@ -63,19 +67,16 @@ block main
                   .text
                   .input-item
                     img.qiniuimg(style="width:100px",src="http://bearwave.qiniudn.com/avatar.png-avatar")
+              .group#photoerror(style="display:none")
+                .tips
+                  h2(style="color:#b94a48;") 你还没有成功上传照片
               .group
                 .text
                   上传头像
                   br
                 .input-item
                   #filePicker 选择图片
-                  将被居中剪裁为500x500的尺寸
-                  .avatar-show
-                    //-{{g.user.looking.photo}}
-      .box
-        .box-title
-          | 设置详细信息
-        .box-content
+        .box-footer
           .regform
             form.light-form(action="/looking/setting",method="POST")
               {{form.csrf_token }}
@@ -84,13 +85,39 @@ block main
               {{render_field(form.height)}}
               {{render_field(form.weight)}}
               {{render_field(form.like)}}
+              {{render_field(form.info)}}
+              .group
+                .tips 简短的介绍下自己，什么特殊爱好特殊要求都可以写在这里
               .div(style="display:none")
                 {{render_field(form.photo)}}
-              {{render_field(form.info)}}
+              .line
+              h3 
+                i.fa.fa-exclamation-circle 
+                |大家平时都很忙没时间跟陌生人介绍自己，如果大家都去认真填写下面的项目就能很方便的了解彼此,为了让"寻"这个功能变得更加有效,至少要完整填写3个栏目
+              {{render_field(form.question1)}}
+              .group
+                .tips 比如：打游戏，拍照，养宠物
+              {{render_field(form.question2)}}
+              .group
+                .tips 给具体几个名字，比如：Lady Gaga , 周杰伦，The Smiths 
+              {{render_field(form.question3)}}
+              .group
+                .tips 给具体几个名字，比如：大鱼 , 搏击俱乐部，嗜血法医 
+              {{render_field(form.question4)}}
+              .group
+                .tips 给具体几个名字，比如：黑客与画家，rework，与齐泽克对话
+              {{render_field(form.question5)}}
+              .group
+                .tips 比如:拥有一个属于自己的房子，玩一次3p，裸奔一次
+              {{render_field(form.question6)}}
+              .group
+                .tips 比如:跟小孩子纠缠在一起，抽烟，玩微博勾搭人
+              .line
               .group
                 .text  
                 .input-item
                   button.light-btn.btn1 提交
+
 
     #aside
       include base/my
@@ -135,6 +162,9 @@ block main
         $("#photo").val(response.hash)
         $(".qiniuimg").attr("src","http://bearwave.qiniudn.com/"+response.hash+"-avatar")
     });
+    if($("#photo").next().text() != ""){
+      $("#photoerror").css("display","block")  
+    }
     })( jQuery );
 
 
