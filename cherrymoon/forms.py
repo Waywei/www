@@ -70,7 +70,7 @@ class SettingForm(Form):
     weixin = TextField(u'微信')
     other1 = TextField(u'qq')
 
-age = [(str(i),str(i)) for i in xrange(12,65)]
+age = [(str(i),str(i)) for i in xrange(16,65)]
 weight = [(str(i),str(i)+u"公斤(kg)") for i in xrange(40,150)]
 height = [(str(i),str(i)+u"厘米(cm)") for i in xrange(150,230)]
  
