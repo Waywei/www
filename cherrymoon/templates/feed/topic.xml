@@ -14,7 +14,7 @@
   <published>{{ topic.create_time|timefeed}}</published>
   <updated>{{ topic.update_time|timefeed}}</updated>
   <content type="html" xml:base="{{site.url}}" xml:lang="en"><![CDATA[
-  {{ topic.content|content }}
+  {{ topic.content|e }}
   ]]></content>
 </entry>{% endfor %}
 </feed>
