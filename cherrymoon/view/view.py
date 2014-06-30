@@ -38,19 +38,19 @@ def interview_atom():
 
 @app.route('/atom.xml')
 def topic_atom():
-    #xml = r.get("feed:topic")
-    #if not xml:
-    topics = Topic.query\
-            .order_by(Topic.create_time.desc()).limit(10).all()
-    site = k()
-    site.title= u"bearwave 话题"
-    site.subtitle = u"最近的话题"
-    site.url = u"http://www.bearwave.com"
-    site.atomurl = u"http://www.bearwave.com/atom.xml"
-    site.topics = topics
-    site.time = datetime.now()
-    xml =  render('/feed/topic.xml',locals())
-        #r.set("feed:topic",xml,60*60)
+    xml = r.get("feed:topic")
+    if not xml:
+        topics = Topic.query\
+                .order_by(Topic.create_time.desc()).limit(10).all()
+        site = k()
+        site.title= u"bearwave 话题"
+        site.subtitle = u"最近的话题"
+        site.url = u"http://www.bearwave.com"
+        site.atomurl = u"http://www.bearwave.com/atom.xml"
+        site.topics = topics
+        site.time = datetime.now()
+        xml =  render('/feed/topic.xml',locals())
+        r.set("feed:topic",xml,60*60)
     return Response(xml, mimetype='text/xml')
 
 @app.route('/')
