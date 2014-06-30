@@ -50,7 +50,7 @@ def topic_atom():
         site.topics = topics
         site.time = datetime.now()
         xml =  render('/feed/topic.xml',locals())
-        r.set("feed:topic",xml,60*60)
+        r.setex("feed:topic",xml,60*60)
     return Response(xml, mimetype='text/xml')
 
 @app.route('/')
