@@ -11,7 +11,7 @@
           li
             a(href="/node") 节点 
           li
-            a(href="/looking") 寻 
+            a(href="/looking") 照片交友 
       .userpanel
         if g.user
             a.avatar(href="/member/{{g.user.id}}")
@@ -25,4 +25,17 @@
             a(href="/logout") 退出
         else
             a(href="/login") 登陆 
+
             a(href="/register") 注册 
+     if g.user
+      .action-box.show-s
+          a(href="/my/favuser") 
+            i.fa.fa-users
+          a(href="/my/favtopic") 
+            i.fa.fa-thumbs-up
+          a(href="/my/favnode") 
+            i.fa.fa-leaf
+          a.light-btn(href="/node/mix/new") 发布话题
+          a.light-btn(href="/treehole/new") 有话告诉树洞
+
+

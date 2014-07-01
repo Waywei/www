@@ -631,7 +631,25 @@ embed
     margin 5px 0px
     font-size 12px
     text-shadow 1px 1px 1px #000
-
+.action-box
+  border-top 1px solid #f2f2f2
+  padding 5px 0px
+  font-size 20px
+  font-weight 100
+  a
+    margin 0px 5px
+    vertical-align middle
+  .light-btn
+    font-size 12px
+.show-s
+  display none
+.show-d
+  display block
+@media (max-width:767px)
+  .show-s
+    display block
+  .show-d
+    display none
 
 @import 'plugin'
 @import 'mobile'
