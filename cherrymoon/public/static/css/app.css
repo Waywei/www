@@ -1515,4 +1515,10 @@ embed {
   .index .index-node .text h3 {
     font-size: 12px;
   }
+  .fa {
+    margin-right: 1px;
+  }
+  .topic-list .info span {
+    margin-right: 4px;
+  }
 }
