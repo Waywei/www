@@ -21,9 +21,9 @@ block main
             for t in topics.items
               .topic-list
                 .item
-                  //-.avatar
+                  .avatar
                     a(href="/member/{{t.user.id}}") 
-                      {{t.user.email | avatar}}
+                      {{t.user | avatar}}
                   .detail
                     h2  
                       a(href="/topic/{{t.id}}") {{t.title | e}}

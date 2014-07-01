@@ -957,11 +957,17 @@ embed {
   background: rgba(255,255,255,0.4);
 }
 .topic-list .avatar {
-  width: 80px;
+  width: 50px;
   float: left;
 }
 .topic-list .avatar img {
-  width: 60px;
+  width: 50px;
+  display: block;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+.topic-list .detail {
+  padding-left: 60px;
 }
 .topic-list .detail h2 {
   margin: 0px 0px 10px 0px;

@@ -1,29 +1,53 @@
 .node-info
-  .avatar
-    a(href="/node/{{node.slug}}")
-      img(src="{{node.avatar}}",alt="{{node.slug}}")
+  if node.avatar != "0"
+    .avatar
+      a(href="/node/{{node.slug}}")
+        img(src="{{node.avatar}}",alt="{{node.slug}}")
+    .detail
+      h2 
+        if node.node_type == 2
+          .fa.fa-lock
+        {{node.name | e}} 
+      p(style="font-size:11px;color:#999")
+        共有{{node.topic_count}}个话题
+      p(style="color:#666") {{node.description}}
+      .action 
+        a.light-btn.btn1(href="/node/{{node.slug}}/new") 
+          i.fa.fa-plus-square
+          span 新话题
+        |   
+        if g.user
+          if isFav
+            a.favnode.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
+              i.fa.fa-star
+              span 取消收藏
+          else
+            a.favnode.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
+              i.fa.fa-star
+              span 收藏节点
 
-  .detail
-    h2 
-      if node.node_type == 2
-        .fa.fa-lock
-      {{node.name | e}} 
-    p(style="font-size:11px;color:#999")
-      共有{{node.topic_count}}个话题
-    p(style="color:#666") {{node.description}}
-    .action 
-      a.light-btn.btn1(href="/node/{{node.slug}}/new") 
-        i.fa.fa-plus-square
-        span 新话题
-      |   
-      if g.user
-        if isFav
-          a.favnode.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
-            i.fa.fa-star
-            span 取消收藏
-        else
-          a.favnode.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
-            i.fa.fa-star
-            span 收藏节点
+  else
+    .detail(style="margin-left:10px")
+      h2 
+        if node.node_type == 2
+          .fa.fa-lock
+        {{node.name | e}} 
+      p(style="font-size:11px;color:#999")
+        共有{{node.topic_count}}个话题
+      p(style="color:#666") {{node.description}}
+      .action 
+        a.light-btn.btn1(href="/node/{{node.slug}}/new") 
+          i.fa.fa-plus-square
+          span 新话题
+        |   
+        if g.user
+          if isFav
+            a.favnode.light-btn.btn2(href="/api/v1/fav/node/{{node.id}}") 
+              i.fa.fa-star
+              span 取消收藏
+          else
+            a.favnode.light-btn.btn1(href="/api/v1/fav/node/{{node.id}}") 
+              i.fa.fa-star
+              span 收藏节点
 
 
