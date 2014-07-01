@@ -58,6 +58,9 @@ block main
         #comment.comment-list
             for c in comments
               .item(id="comment-{{loop.index}}")
+                .avatar
+                  a(href="/member/{{c.user.id}}") 
+                    {{c.user|avatar}}
                 .detail
                   .info
                       span
