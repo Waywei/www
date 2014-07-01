@@ -9,7 +9,7 @@
     p
       |页面打开用了 <-timer-> sec
 
-if config.DEV
+if not config.DEV
   script
     var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
     document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fbb53d58298f564470464a73894fd7a22' type='text/javascript'%3E%3C/script%3E"));
